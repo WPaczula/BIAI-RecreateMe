@@ -1,0 +1,9 @@
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe.config
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.pdb
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.csprojResolveAssemblyReference.cache
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.Properties.Resources.resources
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.csproj.GenerateResource.Cache
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.exe
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.pdb
+c:\users\wojtek\documents\visual studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.RecreateMe.resources

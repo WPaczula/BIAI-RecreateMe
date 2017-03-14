@@ -82,6 +82,19 @@ namespace RecreateMe
             {
                 startButton.Text = "Start";
             }
+
+        }
+
+        //TODO redraw picture if needed and change labels
+        private void redrawImpulse(object sender, EventArgs e)
+        {
+
+        }
+
+        //TODO opening variables form as a dialog and allowing to change values
+        private void geneticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

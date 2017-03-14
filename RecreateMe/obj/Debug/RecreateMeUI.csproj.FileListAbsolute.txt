@@ -1,0 +1,9 @@
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMeUI.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.RecreateMe.resources
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.Properties.Resources.resources
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMeUI.csproj.GenerateResource.Cache
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.exe
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\Debug\RecreateMe.pdb
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe.config
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.pdb

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startButton = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,9 +39,18 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.timeHeaderLabel = new System.Windows.Forms.Label();
+            this.generationLabel = new System.Windows.Forms.Label();
+            this.generationHeaderLabel = new System.Windows.Forms.Label();
+            this.fitnessLabel = new System.Windows.Forms.Label();
+            this.fitnessHeaderLabel = new System.Windows.Forms.Label();
             this.drawing = new Drawing();
+            this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
+            this.geneticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // startButton
@@ -59,6 +69,7 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.imageToolStripMenuItem,
+            this.geneticsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -112,12 +123,75 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.timeLabel);
+            this.groupBox1.Controls.Add(this.timeHeaderLabel);
+            this.groupBox1.Controls.Add(this.generationLabel);
+            this.groupBox1.Controls.Add(this.generationHeaderLabel);
+            this.groupBox1.Controls.Add(this.fitnessLabel);
+            this.groupBox1.Controls.Add(this.fitnessHeaderLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 154);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(125, 213);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(7, 125);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(53, 13);
+            this.timeLabel.TabIndex = 5;
+            this.timeLabel.Text = "Unknown";
+            // 
+            // timeHeaderLabel
+            // 
+            this.timeHeaderLabel.AutoSize = true;
+            this.timeHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.timeHeaderLabel.Location = new System.Drawing.Point(7, 112);
+            this.timeHeaderLabel.Name = "timeHeaderLabel";
+            this.timeHeaderLabel.Size = new System.Drawing.Size(38, 13);
+            this.timeHeaderLabel.TabIndex = 4;
+            this.timeHeaderLabel.Text = "Time:";
+            // 
+            // generationLabel
+            // 
+            this.generationLabel.AutoSize = true;
+            this.generationLabel.Location = new System.Drawing.Point(6, 81);
+            this.generationLabel.Name = "generationLabel";
+            this.generationLabel.Size = new System.Drawing.Size(53, 13);
+            this.generationLabel.TabIndex = 3;
+            this.generationLabel.Text = "Unknown";
+            // 
+            // generationHeaderLabel
+            // 
+            this.generationHeaderLabel.AutoSize = true;
+            this.generationHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.generationHeaderLabel.Location = new System.Drawing.Point(6, 68);
+            this.generationHeaderLabel.Name = "generationHeaderLabel";
+            this.generationHeaderLabel.Size = new System.Drawing.Size(73, 13);
+            this.generationHeaderLabel.TabIndex = 2;
+            this.generationHeaderLabel.Text = "Generation:";
+            // 
+            // fitnessLabel
+            // 
+            this.fitnessLabel.AutoSize = true;
+            this.fitnessLabel.Location = new System.Drawing.Point(7, 33);
+            this.fitnessLabel.Name = "fitnessLabel";
+            this.fitnessLabel.Size = new System.Drawing.Size(53, 13);
+            this.fitnessLabel.TabIndex = 1;
+            this.fitnessLabel.Text = "Unknown";
+            // 
+            // fitnessHeaderLabel
+            // 
+            this.fitnessHeaderLabel.AutoSize = true;
+            this.fitnessHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.fitnessHeaderLabel.Location = new System.Drawing.Point(7, 20);
+            this.fitnessHeaderLabel.Name = "fitnessHeaderLabel";
+            this.fitnessHeaderLabel.Size = new System.Drawing.Size(51, 13);
+            this.fitnessHeaderLabel.TabIndex = 0;
+            this.fitnessHeaderLabel.Text = "Fitness:";
             // 
             // drawing
             // 
@@ -126,6 +200,17 @@
             this.drawing.Size = new System.Drawing.Size(436, 378);
             this.drawing.TabIndex = 4;
             this.drawing.Text = "Drawing";
+            // 
+            // redrawGenerator
+            // 
+            this.redrawGenerator.Tick += new System.EventHandler(this.redrawImpulse);
+            // 
+            // geneticsToolStripMenuItem
+            // 
+            this.geneticsToolStripMenuItem.Name = "geneticsToolStripMenuItem";
+            this.geneticsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.geneticsToolStripMenuItem.Text = "Genetics";
+            this.geneticsToolStripMenuItem.Click += new System.EventHandler(this.geneticsToolStripMenuItem_Click);
             // 
             // RecreateMe
             // 
@@ -144,6 +229,8 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +249,14 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.GroupBox groupBox1;
         private Drawing drawing;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Label timeHeaderLabel;
+        private System.Windows.Forms.Label generationLabel;
+        private System.Windows.Forms.Label generationHeaderLabel;
+        private System.Windows.Forms.Label fitnessLabel;
+        private System.Windows.Forms.Label fitnessHeaderLabel;
+        private System.Windows.Forms.Timer redrawGenerator;
+        private System.Windows.Forms.ToolStripMenuItem geneticsToolStripMenuItem;
     }
 }
 

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecreateMe", "RecreateMe\RecreateMe.csproj", "{55CC3588-3BF1-4C7D-8709-38C915F301D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecreateMeUI", "RecreateMe\RecreateMeUI.csproj", "{55CC3588-3BF1-4C7D-8709-38C915F301D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecreateMeGenetics", "RecreateMeGenetics\RecreateMeGenetics.csproj", "{EAF7059C-3F7E-4028-AC05-9133463C3F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecreateMeUtils", "RecreateMeUtils\RecreateMeUtils.csproj", "{AC439958-7E96-4074-835A-1371AE602781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{55CC3588-3BF1-4C7D-8709-38C915F301D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55CC3588-3BF1-4C7D-8709-38C915F301D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55CC3588-3BF1-4C7D-8709-38C915F301D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF7059C-3F7E-4028-AC05-9133463C3F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF7059C-3F7E-4028-AC05-9133463C3F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF7059C-3F7E-4028-AC05-9133463C3F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF7059C-3F7E-4028-AC05-9133463C3F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC439958-7E96-4074-835A-1371AE602781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC439958-7E96-4074-835A-1371AE602781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC439958-7E96-4074-835A-1371AE602781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC439958-7E96-4074-835A-1371AE602781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

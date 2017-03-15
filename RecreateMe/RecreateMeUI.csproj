@@ -86,6 +86,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RecreateMeGenetics\RecreateMeGenetics.csproj">
+      <Project>{eaf7059c-3f7e-4028-ac05-9133463c3f34}</Project>
+      <Name>RecreateMeGenetics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecreateMeUtils\RecreateMeUtils.csproj">
       <Project>{ac439958-7e96-4074-835a-1371ae602781}</Project>
       <Name>RecreateMeUtils</Name>

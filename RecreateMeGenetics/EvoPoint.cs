@@ -38,7 +38,7 @@ namespace RecreateMeGenetics
         {
             //TODO add probability variable
             
-            //TODO add move if statements???
+            //TODO add more move if statements???
             //move the point by random change between set values
             if (Utils.MutationShouldOccur(0.5))
             {
@@ -49,7 +49,7 @@ namespace RecreateMeGenetics
                 Y = Math.Min(
                     Math.Max
                     (0, X + Utils.GetRandom(-2, 2)), Utils.MaxHeight);
-                parent.NeedRepaint();
+                parent.NeedRepaint = true;
             }
         }
 

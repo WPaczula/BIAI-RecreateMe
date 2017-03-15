@@ -7,3 +7,7 @@ C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\obj\
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe.config
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMe.pdb
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeGenetics.dll
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.dll
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeGenetics.pdb
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.pdb

@@ -1,0 +1,5 @@
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeUtils\bin\Debug\RecreateMeUtils.dll
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeUtils\bin\Debug\RecreateMeUtils.pdb
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeUtils\obj\Debug\RecreateMeUtils.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeUtils\obj\Debug\RecreateMeUtils.dll
+C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeUtils\obj\Debug\RecreateMeUtils.pdb

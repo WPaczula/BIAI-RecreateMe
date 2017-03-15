@@ -34,6 +34,7 @@
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.geneticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.originalPictureBox = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -47,7 +48,6 @@
             this.fitnessHeaderLabel = new System.Windows.Forms.Label();
             this.drawing = new Drawing();
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
-            this.geneticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -73,7 +73,7 @@
             this.exitToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(591, 24);
+            this.menuStrip.Size = new System.Drawing.Size(979, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -100,6 +100,13 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // geneticsToolStripMenuItem
+            // 
+            this.geneticsToolStripMenuItem.Name = "geneticsToolStripMenuItem";
+            this.geneticsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.geneticsToolStripMenuItem.Text = "Genetics";
+            this.geneticsToolStripMenuItem.Click += new System.EventHandler(this.geneticsToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -110,9 +117,9 @@
             // originalPictureBox
             // 
             this.originalPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.originalPictureBox.Location = new System.Drawing.Point(12, 27);
+            this.originalPictureBox.Location = new System.Drawing.Point(143, 32);
             this.originalPictureBox.Name = "originalPictureBox";
-            this.originalPictureBox.Size = new System.Drawing.Size(125, 121);
+            this.originalPictureBox.Size = new System.Drawing.Size(399, 374);
             this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.originalPictureBox.TabIndex = 2;
             this.originalPictureBox.TabStop = false;
@@ -129,9 +136,9 @@
             this.groupBox1.Controls.Add(this.generationHeaderLabel);
             this.groupBox1.Controls.Add(this.fitnessLabel);
             this.groupBox1.Controls.Add(this.fitnessHeaderLabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 154);
+            this.groupBox1.Location = new System.Drawing.Point(12, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 213);
+            this.groupBox1.Size = new System.Drawing.Size(125, 339);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
@@ -195,28 +202,23 @@
             // 
             // drawing
             // 
-            this.drawing.Location = new System.Drawing.Point(143, 27);
+            this.drawing.Location = new System.Drawing.Point(548, 28);
             this.drawing.Name = "drawing";
-            this.drawing.Size = new System.Drawing.Size(436, 378);
+            this.drawing.Size = new System.Drawing.Size(422, 378);
             this.drawing.TabIndex = 4;
             this.drawing.Text = "Drawing";
+            this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);
             // 
             // redrawGenerator
             // 
+            this.redrawGenerator.Interval = 2000;
             this.redrawGenerator.Tick += new System.EventHandler(this.redrawImpulse);
-            // 
-            // geneticsToolStripMenuItem
-            // 
-            this.geneticsToolStripMenuItem.Name = "geneticsToolStripMenuItem";
-            this.geneticsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.geneticsToolStripMenuItem.Text = "Genetics";
-            this.geneticsToolStripMenuItem.Click += new System.EventHandler(this.geneticsToolStripMenuItem_Click);
             // 
             // RecreateMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 418);
+            this.ClientSize = new System.Drawing.Size(979, 418);
             this.Controls.Add(this.drawing);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.originalPictureBox);

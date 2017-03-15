@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RecreateMeGenetics;
 
 namespace RecreateMe
 {
@@ -20,11 +22,15 @@ namespace RecreateMe
         private Rectangle imageRectangle;
         //Program running
         private bool duringDrawing;
-
+        //TODO change number of drawings???
+        private EvoDrawing drawingData;
         public RecreateMe()
         {
             InitializeComponent();
             duringDrawing = false;
+            originalBitmap = (Bitmap)originalPictureBox.Image;
+            //TODO change values to variables
+            drawingData = new EvoDrawing(3, 10);
         }
 
         //Opening image from dialog
@@ -76,10 +82,12 @@ namespace RecreateMe
 
             if(duringDrawing)
             {
+                redrawGenerator.Start();
                 startButton.Text = "Stop";
             }
             else
             {
+                redrawGenerator.Stop();
                 startButton.Text = "Start";
             }
 
@@ -88,13 +96,22 @@ namespace RecreateMe
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
-
+            drawingData.Mutate();
+            if(drawingData.NeedRepaint)
+                drawing.Invalidate();
         }
 
         //TODO opening variables form as a dialog and allowing to change values
         private void geneticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
 
+        private void drawing_Paint(object sender, PaintEventArgs e)
+        {
+            var templateBitmap = new Bitmap(originalPictureBox.Width, originalPictureBox.Height, PixelFormat.Format24bppRgb);
+            Graphics graphic = Graphics.FromImage(templateBitmap);
+            drawingData.Draw(graphic);
+            e.Graphics.DrawImage(templateBitmap, new Point(0, 0));
         }
     }
 }

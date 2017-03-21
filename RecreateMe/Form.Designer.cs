@@ -120,7 +120,7 @@
             this.originalPictureBox.Location = new System.Drawing.Point(143, 32);
             this.originalPictureBox.Name = "originalPictureBox";
             this.originalPictureBox.Size = new System.Drawing.Size(399, 374);
-            this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.originalPictureBox.TabIndex = 2;
             this.originalPictureBox.TabStop = false;
             // 
@@ -202,9 +202,9 @@
             // 
             // drawing
             // 
-            this.drawing.Location = new System.Drawing.Point(548, 28);
+            this.drawing.Location = new System.Drawing.Point(548, 32);
             this.drawing.Name = "drawing";
-            this.drawing.Size = new System.Drawing.Size(422, 378);
+            this.drawing.Size = new System.Drawing.Size(422, 374);
             this.drawing.TabIndex = 4;
             this.drawing.Text = "Drawing";
             this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);

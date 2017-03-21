@@ -8,6 +8,10 @@ using RecreateMeUtils;
 
 namespace RecreateMeGenetics
 {
+    //Possible drawing shapes
+    //TODO add more shapes??
+    public enum ShapeType{ elipse, polygon };
+
     //TODO: comments and the rest of drawing
     //Class of a single drawing
     public class EvoDrawing
@@ -72,14 +76,22 @@ namespace RecreateMeGenetics
             }
         }
         //Draw a drawing
-        //TODO choosing type of figure
-        //TODO choosing background color???
-        public void Draw(Graphics graphic)
+        //TODO add more types???
+        public void Draw(Graphics graphic, Color backgroundColor, ShapeType drawingShape)
         {
-            graphic.Clear(Color.Black);
+            graphic.Clear(backgroundColor);
             foreach (var shape in shapes)
             {
-                graphic.FillClosedCurve(shape.getBrush(), shape.getPoints());
+                switch (drawingShape)
+                {
+                    case ShapeType.elipse:
+                        graphic.FillClosedCurve(shape.getBrush(), shape.getPoints());
+                        break;
+                    case ShapeType.polygon:
+                        graphic.FillPolygon(shape.getBrush(), shape.getPoints());
+                        break;
+                }
+                
             }
         }
     }

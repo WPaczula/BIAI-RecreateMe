@@ -15,6 +15,11 @@ namespace RecreateMeGenetics
         private List<EvoPoint> shapePoints;
         //Color of the shape
         private EvoColor color;
+        public EvoColor Color
+        {
+            get { return color; }
+            private set { color = value; }
+        }
         //Minimum points required for a shape
         private int minPoints;
         public int MinPoints
@@ -45,6 +50,24 @@ namespace RecreateMeGenetics
             }            
         }
 
+        public EvoShape Clone()
+        {
+            var list = new List<EvoPoint>();
+            foreach (var point in shapePoints)
+            {
+                list.Add(point.Clone());
+            }
+            return new EvoShape(list, Color, MinPoints, MaxPoints);
+        }
+
+        private EvoShape(List<EvoPoint> points, EvoColor color, int minPoints, int maxPoints)
+        {
+            shapePoints = points;
+            Color = color;
+            MinPoints = minPoints;
+            MaxPoints = maxPoints;
+        }
+
         //Gets brush which is needed to paint 
         public SolidBrush getBrush()
         {
@@ -69,7 +92,7 @@ namespace RecreateMeGenetics
         public void Mutate(EvoDrawing parent)
         {
             //Move points
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
                 foreach (var point in shapePoints)
                 {
@@ -78,18 +101,18 @@ namespace RecreateMeGenetics
                 parent.NeedRepaint = true;
             }
             //Add point to shape
-            if (shapePoints.Count < MaxPoints && Utils.MutationShouldOccur(0.5))
+            if (shapePoints.Count < MaxPoints && Probability.MutationShouldOccur(Probability.prob))
             {
                 parent.NeedRepaint = true;
                 shapePoints.Add(new EvoPoint());
             }
             //Delete point
-            if(shapePoints.Count > MinPoints && Utils.MutationShouldOccur(0.5))
+            if(shapePoints.Count > MinPoints && Probability.MutationShouldOccur(Probability.prob))
             {
                 parent.NeedRepaint = true;
                 shapePoints.Remove(
                     shapePoints.ElementAt<EvoPoint>(
-                        Utils.GetRandom(0, shapePoints.Count)));
+                        Probability.GetRandom(0, shapePoints.Count)));
             }
         }
     }

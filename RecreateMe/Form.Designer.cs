@@ -46,8 +46,8 @@
             this.generationHeaderLabel = new System.Windows.Forms.Label();
             this.fitnessLabel = new System.Windows.Forms.Label();
             this.fitnessHeaderLabel = new System.Windows.Forms.Label();
-            this.drawing = new Drawing();
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
+            this.drawing = new Drawing();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -200,6 +200,11 @@
             this.fitnessHeaderLabel.TabIndex = 0;
             this.fitnessHeaderLabel.Text = "Fitness:";
             // 
+            // redrawGenerator
+            // 
+            this.redrawGenerator.Interval = 10;
+            this.redrawGenerator.Tick += new System.EventHandler(this.redrawImpulse);
+            // 
             // drawing
             // 
             this.drawing.Location = new System.Drawing.Point(548, 32);
@@ -208,11 +213,6 @@
             this.drawing.TabIndex = 4;
             this.drawing.Text = "Drawing";
             this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);
-            // 
-            // redrawGenerator
-            // 
-            this.redrawGenerator.Interval = 2000;
-            this.redrawGenerator.Tick += new System.EventHandler(this.redrawImpulse);
             // 
             // RecreateMe
             // 

@@ -9,13 +9,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecreateMeGenetics;
+using RecreateMeUtils;
+using System.Threading;
 
 namespace RecreateMe
 {
     public partial class RecreateMe : Form
     {
+        //Evolution thread
+        private Thread evoThread;
+        //Bitmap to image scale
+        private double resizeFactor;
         //Bitmap of the original image
         private Bitmap originalBitmap;
+        //Table containing colors of original image
+        private byte[] colorTable;
         //Size of the image
         private int imageSize;
         //Rectangle bordering the image
@@ -56,6 +64,10 @@ namespace RecreateMe
                     var location = drawing.Location;
                     location.Offset(0, getYOffset(originalBitmap, originalPictureBox, drawing));
                     drawing.Location = location;
+                    //Set up colors of the original image
+                    colorTable = BitmapConverter.ByteTableFrom(originalBitmap);
+                    Probability.MaxHeight = drawing.Size.Height;
+                    Probability.MaxWidth = drawing.Size.Width;
                     this.Invalidate();
                 }
                 catch (Exception ex)
@@ -71,7 +83,7 @@ namespace RecreateMe
             var wfactor = (double)image.Width / box.ClientSize.Width;
             var hfactor = (double)image.Height / box.ClientSize.Height;
 
-            var resizeFactor = Math.Max(wfactor, hfactor);
+            resizeFactor = Math.Max(wfactor, hfactor);
             return new Size((int)(image.Width / resizeFactor), (int)(image.Height / resizeFactor));
         }
 
@@ -96,37 +108,77 @@ namespace RecreateMe
         //Exit forms application
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            Application.Exit();
         }
 
         //Start or stop algorithm 
         private void startButton_Click(object sender, EventArgs e)
         {
-            duringDrawing = !duringDrawing;
-
             if(duringDrawing)
-            {
-                redrawGenerator.Start();
-                startButton.Text = "Stop";
-            }
+                stopEvolution();
             else
-            {
-                redrawGenerator.Stop();
-                startButton.Text = "Start";
-            }
+                startEvolution();
 
+            duringDrawing = !duringDrawing;
+        }
+        public void Evolve()
+        {
+            double fitness = EvolutionManager.Fitness(drawingData, colorTable);
+            while (true)
+            {
+                EvoDrawing child;
+                lock (drawingData)
+                {
+                    child = drawingData.Clone();
+                }
+                child.Mutate();
+                var childsFitness = EvolutionManager.Fitness(child, colorTable);
+                if (fitness > childsFitness)
+                {
+                    drawingData = child;
+                    fitness = childsFitness;
+                    drawingData.NeedRepaint = true;
+                }
+            }
         }
 
+        private void startEvolution()
+        {
+            redrawGenerator.Start();
+            startButton.Text = "Stop";
+            if (evoThread != null)
+                evoThread.Abort();
+            evoThread = new Thread(Evolve)
+            {
+                IsBackground = true,
+                Priority = ThreadPriority.AboveNormal
+            };
+            evoThread.Start();
+        }
+
+        private void stopEvolution()
+        {
+            redrawGenerator.Stop();
+            startButton.Text = "Start";
+            evoThread.Abort();
+        }
+        
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
-            drawingData.Mutate();
+            //evoManager.Evolve();
             if(drawingData.NeedRepaint)
+            {
                 drawing.Invalidate();
+                drawingData.NeedRepaint = false;
+           }
+                
         }
 
         private void drawing_Paint(object sender, PaintEventArgs e)
         {
+            if (originalBitmap == null)
+                return;
             var templateBitmap = new Bitmap(originalPictureBox.Width, originalPictureBox.Height, PixelFormat.Format24bppRgb);
             Graphics graphic = Graphics.FromImage(templateBitmap);
             //TODO add user's choice

@@ -17,13 +17,26 @@ namespace RecreateMeGenetics
         private int blue;
         private int alpha;
 
+        public EvoColor Clone()
+        {
+            return new EvoColor(red, green, blue, alpha);
+        }
+
         //Constructor of a random color
         public EvoColor()
         {
-            red = Utils.GetRandom(0, 255);
-            green = Utils.GetRandom(0, 255);
-            blue = Utils.GetRandom(0, 255);
-            alpha = Utils.GetRandom(0, 255);
+            red = Probability.GetRandom(0, 255);
+            green = Probability.GetRandom(0, 255);
+            blue = Probability.GetRandom(0, 255);
+            alpha = Probability.GetRandom(0, 255);
+        }
+
+        private EvoColor(int r, int g, int b, int a)
+        {
+            red = r;
+            green = g;
+            blue = b;
+            alpha = a;
         }
 
         //Mutation of a color
@@ -31,27 +44,27 @@ namespace RecreateMeGenetics
         public void Mutate(EvoDrawing parent)
         {
             //Red mutation
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
-                red = Utils.GetRandom(0, 255);
+                red = Probability.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Green mutation
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
-                green = Utils.GetRandom(0, 255);
+                green = Probability.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Blue mutation
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
-                blue = Utils.GetRandom(0, 255);
+                blue = Probability.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Alpha mutation
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
-                alpha = Utils.GetRandom(0, 255);
+                alpha = Probability.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
         }

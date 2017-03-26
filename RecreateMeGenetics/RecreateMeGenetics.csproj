@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,7 @@
   <ItemGroup>
     <Compile Include="EvoColor.cs" />
     <Compile Include="EvoDrawing.cs" />
+    <Compile Include="EvolutionManager.cs" />
     <Compile Include="EvoShape.cs" />
     <Compile Include="EvoPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

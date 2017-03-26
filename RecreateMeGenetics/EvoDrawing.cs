@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using RecreateMeUtils;
+using System.Drawing.Imaging;
 
 namespace RecreateMeGenetics
 {
@@ -16,6 +17,8 @@ namespace RecreateMeGenetics
     //Class of a single drawing
     public class EvoDrawing
     {
+        //Shape used for drawing 
+        private ShapeType shape;
         //List containing figures on the drawing
         private List<EvoShape> shapes;
         //Variable showing if repaint of the drawing is needed
@@ -40,6 +43,19 @@ namespace RecreateMeGenetics
             set { maxShapePoints = value; }
         }
 
+        public EvoDrawing Clone()
+        {
+            return new EvoDrawing(shapes, shape, MinShapePoints, MaxShapePoints);
+        }
+
+        private EvoDrawing(List<EvoShape> shapeList, ShapeType type, int minPoints, int maxPoints )
+        {
+            shapes = shapeList;
+            shape = type;
+            minShapePoints = minPoints;
+            MaxShapePoints = maxPoints;
+        }
+
         public EvoDrawing(int minShapePoints, int maxShapePoints)
         {
             shapes = new List<EvoShape>();
@@ -52,7 +68,7 @@ namespace RecreateMeGenetics
         public void Mutate()
         {
             //Mutate shape
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob+0.01))
             {
                 foreach (var figure in shapes)
                 {
@@ -60,18 +76,18 @@ namespace RecreateMeGenetics
                 }
             }
             //Add shape
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob+0.01))
             {
                 shapes.Add(new EvoShape(MinShapePoints, MaxShapePoints));
                 NeedRepaint = true;
             }
             //Remove shape
             //TODO Considering minimum shapes variable or deleting first part of if statement
-            if (shapes.Count > 1 && Utils.MutationShouldOccur(0.5))
+            if (shapes.Count > 1 && Probability.MutationShouldOccur(Probability.prob))
             {
                 shapes.Remove(
                     shapes.ElementAt<EvoShape>(
-                        Utils.GetRandom(0, shapes.Count)));
+                        Probability.GetRandom(0, shapes.Count)));
                 NeedRepaint = true;
             }
         }
@@ -93,6 +109,15 @@ namespace RecreateMeGenetics
                 }
                 
             }
+        }
+
+        public byte[] ToColors()
+        {
+            var templateBitmap = new Bitmap(Probability.MaxWidth, Probability.MaxHeight, PixelFormat.Format24bppRgb);
+            Graphics graphic = Graphics.FromImage(templateBitmap);
+            Draw(graphic, Color.Black, shape);
+            return BitmapConverter.ByteTableFrom(templateBitmap);
+
         }
     }
 }

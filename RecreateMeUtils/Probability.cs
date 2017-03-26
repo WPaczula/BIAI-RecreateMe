@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RecreateMeUtils
 {
-    public static class Utils
+    public static class Probability
     {
         //Maxumum width of the drawing
-        public static int MaxWidth = 100;
+        public static int MaxWidth;
         //Maximum height of the drawing
-        public static int MaxHeight = 100;
-
+        public static int MaxHeight;
+        public static double prob = 0.0066;
         //Random generating object
         private static Random randomGenerator = new Random();
         public static int GetRandom(int min, int max)

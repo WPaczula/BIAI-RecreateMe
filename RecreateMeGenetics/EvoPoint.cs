@@ -29,8 +29,18 @@ namespace RecreateMeGenetics
         public EvoPoint()
         {
             //Initiate coordinates of the point on the drawing
-            X = Utils.GetRandom(0, Utils.MaxWidth);
-            Y = Utils.GetRandom(0, Utils.MaxHeight);
+            X = Probability.GetRandom(0, Probability.MaxWidth);
+            Y = Probability.GetRandom(0, Probability.MaxHeight);
+        }
+
+        private EvoPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        public EvoPoint Clone()
+        {
+            return new EvoPoint(X, Y);
         }
 
         //TODO add mutation rates and min/max move values
@@ -40,15 +50,15 @@ namespace RecreateMeGenetics
             
             //TODO add more move if statements???
             //move the point by random change between set values
-            if (Utils.MutationShouldOccur(0.5))
+            if (Probability.MutationShouldOccur(Probability.prob))
             {
                 //TODO add min and max move distance variables
                 X = Math.Min(
                     Math.Max(
-                        0, X + Utils.GetRandom(-2, 2)), Utils.MaxWidth);
+                        0, X + Probability.GetRandom(-2, 2)), Probability.MaxWidth);
                 Y = Math.Min(
                     Math.Max
-                    (0, X + Utils.GetRandom(-2, 2)), Utils.MaxHeight);
+                    (0, X + Probability.GetRandom(-2, 2)), Probability.MaxHeight);
                 parent.NeedRepaint = true;
             }
         }

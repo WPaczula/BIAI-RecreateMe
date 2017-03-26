@@ -26,5 +26,9 @@ namespace RecreateMeUtils
             return (randomGenerator.NextDouble() <= possibility);
         }
 
+        public static int GetAverage(int a, int b)
+        {
+            return (a + b) / 2;
+        }
     }
 }

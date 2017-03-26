@@ -91,20 +91,21 @@ namespace RecreateMeGenetics
         //TODO change mutation rates to variables
         public void Mutate(EvoDrawing parent)
         {
-            //Move points
-            if (Probability.MutationShouldOccur(Probability.prob))
+            foreach (var point in shapePoints)
             {
-                foreach (var point in shapePoints)
-                {
-                    point.Mutate(parent);
-                }
-                parent.NeedRepaint = true;
+                point.Mutate(parent);
             }
+
             //Add point to shape
             if (shapePoints.Count < MaxPoints && Probability.MutationShouldOccur(Probability.prob))
             {
                 parent.NeedRepaint = true;
-                shapePoints.Add(new EvoPoint());
+
+                EvoPoint additionalPoint = new EvoPoint();
+                int i = Probability.GetRandom(1, shapePoints.Count - 1);
+                additionalPoint.X = Probability.GetAverage(shapePoints[i - 1].X, shapePoints[i + 1].X);
+                additionalPoint.Y = Probability.GetAverage(shapePoints[i - 1].Y, shapePoints[i + 1].Y);
+                shapePoints.Insert(i, additionalPoint);
             }
             //Delete point
             if(shapePoints.Count > MinPoints && Probability.MutationShouldOccur(Probability.prob))
@@ -114,6 +115,8 @@ namespace RecreateMeGenetics
                     shapePoints.ElementAt<EvoPoint>(
                         Probability.GetRandom(0, shapePoints.Count)));
             }
+
+            color.Mutate(parent);
         }
     }
 }

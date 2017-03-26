@@ -67,55 +67,100 @@ namespace RecreateMeGenetics
         //TODO change mutation rates to variables
         public void Mutate()
         {
-            //Mutate shape
-            if (Probability.MutationShouldOccur(Probability.prob+0.01))
+
+            foreach (var figure in shapes)
             {
-                foreach (var figure in shapes)
-                {
-                    figure.Mutate(this);
-                }
+                figure.Mutate(this);
             }
+
             //Add shape
-            if (Probability.MutationShouldOccur(Probability.prob+0.01))
+            if (Probability.MutationShouldOccur(Probability.prob*2))
             {
-                shapes.Add(new EvoShape(MinShapePoints, MaxShapePoints));
+                shapes.Insert(
+                    Probability.GetRandom(0, shapes.Count), 
+                        new EvoShape(MinShapePoints, MaxShapePoints));
                 NeedRepaint = true;
+            }
+            //Change layer
+            if(shapes.Count > 1 && Probability.MutationShouldOccur(Probability.prob * 2))
+            {
+                int i = Probability.GetRandom(0, shapes.Count);
+                EvoShape p = shapes.ElementAt(i);
+                shapes.RemoveAt(i);
+                i = Probability.GetRandom(0, shapes.Count);
+                shapes.Insert(i, p);
+
             }
             //Remove shape
             //TODO Considering minimum shapes variable or deleting first part of if statement
             if (shapes.Count > 1 && Probability.MutationShouldOccur(Probability.prob))
             {
                 shapes.Remove(
-                    shapes.ElementAt<EvoShape>(
+                    shapes.ElementAt(
                         Probability.GetRandom(0, shapes.Count)));
                 NeedRepaint = true;
             }
         }
         //Draw a drawing
         //TODO add more types???
-        public void Draw(Graphics graphic, Color backgroundColor, ShapeType drawingShape)
+        public void Draw(Graphics graphic, Color backgroundColor, ShapeType drawingShape, double resizeFactor)
         {
-            graphic.Clear(backgroundColor);
-            foreach (var shape in shapes)
+            lock(this)
             {
-                switch (drawingShape)
+                graphic.Clear(backgroundColor);
+                foreach (var shape in shapes)
                 {
-                    case ShapeType.elipse:
-                        graphic.FillClosedCurve(shape.getBrush(), shape.getPoints());
-                        break;
-                    case ShapeType.polygon:
-                        graphic.FillPolygon(shape.getBrush(), shape.getPoints());
-                        break;
+                    Point[] scaled = shape.getPoints();
+                    if (resizeFactor > 1)
+                    {
+                        for (int i = 0; i < scaled.Count(); i++)
+                        {
+                            scaled[i].X = (int)(scaled[i].X / resizeFactor);
+                            scaled[i].Y = (int)(scaled[i].Y / resizeFactor);
+                        }
+                        switch (drawingShape)
+                        {
+                            case ShapeType.elipse:
+                                graphic.FillClosedCurve(shape.getBrush(), scaled);
+                                break;
+                            case ShapeType.polygon:
+                                graphic.FillPolygon(shape.getBrush(), scaled);
+                                break;
+                        }
+                    }
                 }
-                
             }
         }
 
         public byte[] ToColors()
         {
+            /*double error = 0;
+
+            using (var b = new Bitmap(Tools.MaxWidth, Tools.MaxHeight, PixelFormat.Format24bppRgb))
+            using (Graphics g = Graphics.FromImage(b))
+            {
+                Renderer.Render(newDrawing, g, 1);
+
+                BitmapData bmd1 = b.LockBits(new Rectangle(0, 0, Tools.MaxWidth, Tools.MaxHeight), ImageLockMode.ReadOnly,
+                                             PixelFormat.Format24bppRgb);
+
+
+                for (int y = 0; y < Tools.MaxHeight; y++)
+                {
+                    for (int x = 0; x < Tools.MaxWidth; x++)
+                    {
+                        Color c1 = GetPixel(bmd1, x, y);
+                        Color c2 = sourceColors[x, y];
+
+                        double pixelError = GetColorFitness(c1, c2);
+                        error += pixelError;
+                    }
+                }
+
+                b.UnlockBits(bmd1);*/
             var templateBitmap = new Bitmap(Probability.MaxWidth, Probability.MaxHeight, PixelFormat.Format24bppRgb);
             Graphics graphic = Graphics.FromImage(templateBitmap);
-            Draw(graphic, Color.Black, shape);
+            Draw(graphic, Color.Black, shape, 1);
             return BitmapConverter.ByteTableFrom(templateBitmap);
 
         }

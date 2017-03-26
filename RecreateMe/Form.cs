@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RecreateMeGenetics;
 using RecreateMeUtils;
 using System.Threading;
+using System.IO;
 
 namespace RecreateMe
 {
     public partial class RecreateMe : Form
     {
+        double fitness = double.MaxValue;
         //Evolution thread
         private Thread evoThread;
         //Bitmap to image scale
@@ -24,8 +20,6 @@ namespace RecreateMe
         private Bitmap originalBitmap;
         //Table containing colors of original image
         private byte[] colorTable;
-        //Size of the image
-        private int imageSize;
         //Rectangle bordering the image
         private Rectangle imageRectangle;
         //Program running
@@ -56,7 +50,6 @@ namespace RecreateMe
                     //Set variables' values
                     originalBitmap = (Bitmap)Image.FromFile(fileDialog.FileName);
                     originalPictureBox.Image = originalBitmap;
-                    this.imageSize = originalBitmap.Height * originalBitmap.Width * 3;
                     imageRectangle.Height = originalBitmap.Height;
                     imageRectangle.Width = originalBitmap.Width;
                     //Set size and location of the drawing
@@ -66,8 +59,8 @@ namespace RecreateMe
                     drawing.Location = location;
                     //Set up colors of the original image
                     colorTable = BitmapConverter.ByteTableFrom(originalBitmap);
-                    Probability.MaxHeight = drawing.Size.Height;
-                    Probability.MaxWidth = drawing.Size.Width;
+                    Probability.MaxHeight = originalBitmap.Height;
+                    Probability.MaxWidth = originalBitmap.Width;
                     this.Invalidate();
                 }
                 catch (Exception ex)
@@ -121,24 +114,18 @@ namespace RecreateMe
 
             duringDrawing = !duringDrawing;
         }
+        //Evolve algorithm
         public void Evolve()
         {
-            double fitness = EvolutionManager.Fitness(drawingData, colorTable);
-            while (true)
+            EvoDrawing child;
+            child = drawingData.Clone();
+            child.Mutate();
+            var childsFitness = EvolutionManager.Fitness(child, colorTable);
+            if (fitness > childsFitness)
             {
-                EvoDrawing child;
-                lock (drawingData)
-                {
-                    child = drawingData.Clone();
-                }
-                child.Mutate();
-                var childsFitness = EvolutionManager.Fitness(child, colorTable);
-                if (fitness > childsFitness)
-                {
-                    drawingData = child;
-                    fitness = childsFitness;
-                    drawingData.NeedRepaint = true;
-                }
+                drawingData = child;
+                fitness = childsFitness;
+                drawingData.NeedRepaint = true;
             }
         }
 
@@ -148,29 +135,25 @@ namespace RecreateMe
             startButton.Text = "Stop";
             if (evoThread != null)
                 evoThread.Abort();
-            evoThread = new Thread(Evolve)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.AboveNormal
-            };
-            evoThread.Start();
         }
 
         private void stopEvolution()
         {
             redrawGenerator.Stop();
             startButton.Text = "Start";
-            evoThread.Abort();
         }
         
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
-            //evoManager.Evolve();
+            Evolve();
             if(drawingData.NeedRepaint)
             {
+                lock(drawingData)
+                {
+                    drawingData.NeedRepaint = false;
+                }
                 drawing.Invalidate();
-                drawingData.NeedRepaint = false;
            }
                 
         }
@@ -179,10 +162,10 @@ namespace RecreateMe
         {
             if (originalBitmap == null)
                 return;
-            var templateBitmap = new Bitmap(originalPictureBox.Width, originalPictureBox.Height, PixelFormat.Format24bppRgb);
+            var templateBitmap = new Bitmap(originalBitmap.Width, originalBitmap.Height, PixelFormat.Format24bppRgb);
             Graphics graphic = Graphics.FromImage(templateBitmap);
             //TODO add user's choice
-            drawingData.Draw(graphic, Color.Black, ShapeType.elipse);
+            drawingData.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
             e.Graphics.DrawImage(templateBitmap, new Point(0, 0));
         }
 

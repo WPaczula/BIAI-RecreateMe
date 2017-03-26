@@ -28,7 +28,7 @@ namespace RecreateMeGenetics
             red = Probability.GetRandom(0, 255);
             green = Probability.GetRandom(0, 255);
             blue = Probability.GetRandom(0, 255);
-            alpha = Probability.GetRandom(0, 255);
+            alpha = Probability.GetRandom(20, 40);
         }
 
         private EvoColor(int r, int g, int b, int a)

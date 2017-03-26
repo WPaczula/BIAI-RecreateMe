@@ -9,28 +9,15 @@ namespace RecreateMeGenetics
 {
     public static class EvolutionManager
     {
-        /*private byte[] image;
-        private EvoDrawing drawing;
-        private double fitness;
-        public EvoDrawing Drawing
-        {
-            get { return drawing; }
-            private set { drawing = value; }
-        }
-        public EvolutionManager(byte[] img, ref EvoDrawing drawing)
-        {
-            image = img;
-            Drawing = drawing;
-            fitness = Fitness(drawing);
-        }*/
-
         public static double Fitness(EvoDrawing drawing, byte[] image)
         {
             double fitness = 0;
             byte[] colors = drawing.ToColors();
-            for(int i=0; i<colors.Count(); i++)
+            for(int i=0; i<colors.Count(); i+=3)
             {
-                fitness += Math.Abs(colors[i] - image[i]);
+                fitness += Math.Abs(colors[i] - image[i]) 
+                    + Math.Abs(colors[i + 1] - image[i + 1]) 
+                    + Math.Abs(colors[i + 2] - image[i + 2]);
             }
             return fitness;
         }

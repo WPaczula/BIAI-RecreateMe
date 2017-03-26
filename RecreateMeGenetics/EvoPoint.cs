@@ -15,7 +15,7 @@ namespace RecreateMeGenetics
         public int X
         {
             get { return x; }
-            private set { x = value; }
+            set { x = value; }
         }
 
         //Y coordinate of the point
@@ -23,7 +23,7 @@ namespace RecreateMeGenetics
         public int Y
         {
             get { return y; }
-            private set { y = value; }
+            set { y = value; }
         }
 
         public EvoPoint()
@@ -55,10 +55,10 @@ namespace RecreateMeGenetics
                 //TODO add min and max move distance variables
                 X = Math.Min(
                     Math.Max(
-                        0, X + Probability.GetRandom(-2, 2)), Probability.MaxWidth);
+                        0, X + Probability.GetRandom(-20, 20)), Probability.MaxWidth);
                 Y = Math.Min(
                     Math.Max
-                    (0, X + Probability.GetRandom(-2, 2)), Probability.MaxHeight);
+                    (0, Y + Probability.GetRandom(-20, 20)), Probability.MaxHeight);
                 parent.NeedRepaint = true;
             }
         }

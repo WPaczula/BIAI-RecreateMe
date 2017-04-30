@@ -11,7 +11,7 @@ namespace RecreateMe
 {
     public partial class RecreateMe : Form
     {
-        double fitness = double.MaxValue;
+        private double fitness = double.MaxValue;
         //Evolution thread
         private Thread evoThread;
         //Bitmap to image scale
@@ -26,13 +26,14 @@ namespace RecreateMe
         private bool duringDrawing;
         //TODO change number of drawings???
         private EvoDrawing drawingData;
+        //drawing being shown on gui
+        private EvoDrawing drawingToBeShown;
+        private int tryout = 0;
         public RecreateMe()
         {
             InitializeComponent();
             duringDrawing = false;
             originalBitmap = (Bitmap)originalPictureBox.Image;
-            //TODO change values to variables
-            drawingData = new EvoDrawing(3, 10);
         }
 
         //Opening image from dialog
@@ -59,8 +60,11 @@ namespace RecreateMe
                     drawing.Location = location;
                     //Set up colors of the original image
                     colorTable = BitmapConverter.ByteTableFrom(originalBitmap);
-                    Probability.MaxHeight = originalBitmap.Height;
-                    Probability.MaxWidth = originalBitmap.Width;
+                    Numbers.MaxHeight = originalBitmap.Height;
+                    Numbers.MaxWidth = originalBitmap.Width;
+                    //TODO change values to variables
+                    drawingData = new EvoDrawing(3, 10);
+                    drawingToBeShown = drawingData.Clone();
                     this.Invalidate();
                 }
                 catch (Exception ex)
@@ -117,15 +121,25 @@ namespace RecreateMe
         //Evolve algorithm
         public void Evolve()
         {
-            EvoDrawing child;
-            child = drawingData.Clone();
-            child.Mutate();
-            var childsFitness = EvolutionManager.Fitness(child, colorTable);
-            if (fitness > childsFitness)
+            double childsFitness = 0;
+            while (true)
             {
-                drawingData = child;
-                fitness = childsFitness;
-                drawingData.NeedRepaint = true;
+                EvoDrawing child;
+                lock (drawingData)
+                {
+                    child = drawingData.Clone();
+                }
+                child.Mutate();
+                childsFitness = EvolutionManager.Fitness(child, colorTable);
+                if (fitness > childsFitness)
+                {
+                    lock (drawingData)
+                    {
+                        drawingData = child;
+                    }
+                    fitness = childsFitness;
+                    drawingData.NeedRepaint = true;
+                }
             }
         }
 
@@ -133,40 +147,46 @@ namespace RecreateMe
         {
             redrawGenerator.Start();
             startButton.Text = "Stop";
-            if (evoThread != null)
-                evoThread.Abort();
+            evoThread = new Thread(Evolve)
+            {
+                IsBackground = true,
+                Priority = ThreadPriority.Highest
+            };
+            evoThread.Start();
         }
 
         private void stopEvolution()
         {
             redrawGenerator.Stop();
             startButton.Text = "Start";
+            evoThread.Abort();
         }
         
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
-            Evolve();
-            if(drawingData.NeedRepaint)
+            if (drawingData.NeedRepaint)
             {
-                lock(drawingData)
+                lock (drawingData)
                 {
-                    drawingData.NeedRepaint = false;
+                    drawingToBeShown = drawingData.Clone();
                 }
+                drawingData.NeedRepaint = false;
                 drawing.Invalidate();
-           }
-                
+            }
+
         }
 
         private void drawing_Paint(object sender, PaintEventArgs e)
         {
             if (originalBitmap == null)
                 return;
-            var templateBitmap = new Bitmap(originalBitmap.Width, originalBitmap.Height, PixelFormat.Format24bppRgb);
-            Graphics graphic = Graphics.FromImage(templateBitmap);
-            //TODO add user's choice
-            drawingData.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
-            e.Graphics.DrawImage(templateBitmap, new Point(0, 0));
+
+                var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
+                Graphics graphic = Graphics.FromImage(templateBitmap);
+                //TODO add user's choice
+                drawingToBeShown.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
+                e.Graphics.DrawImage(templateBitmap, 0, 0);
         }
 
 

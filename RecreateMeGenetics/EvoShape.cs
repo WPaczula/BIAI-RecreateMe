@@ -97,23 +97,23 @@ namespace RecreateMeGenetics
             }
 
             //Add point to shape
-            if (shapePoints.Count < MaxPoints && Probability.MutationShouldOccur(Probability.prob))
+            if (shapePoints.Count < MaxPoints && Numbers.MutationShouldOccur(Numbers.prob))
             {
                 parent.NeedRepaint = true;
 
                 EvoPoint additionalPoint = new EvoPoint();
-                int i = Probability.GetRandom(1, shapePoints.Count - 1);
-                additionalPoint.X = Probability.GetAverage(shapePoints[i - 1].X, shapePoints[i + 1].X);
-                additionalPoint.Y = Probability.GetAverage(shapePoints[i - 1].Y, shapePoints[i + 1].Y);
+                int i = Numbers.GetRandom(1, shapePoints.Count - 1);
+                additionalPoint.X = Numbers.GetAverage(shapePoints[i - 1].X, shapePoints[i].X);
+                additionalPoint.Y = Numbers.GetAverage(shapePoints[i - 1].Y, shapePoints[i].Y);
                 shapePoints.Insert(i, additionalPoint);
             }
             //Delete point
-            if(shapePoints.Count > MinPoints && Probability.MutationShouldOccur(Probability.prob))
+            if(shapePoints.Count > MinPoints && Numbers.MutationShouldOccur(Numbers.prob))
             {
                 parent.NeedRepaint = true;
                 shapePoints.Remove(
                     shapePoints.ElementAt<EvoPoint>(
-                        Probability.GetRandom(0, shapePoints.Count)));
+                        Numbers.GetRandom(0, shapePoints.Count)));
             }
 
             color.Mutate(parent);

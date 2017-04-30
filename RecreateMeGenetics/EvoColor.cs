@@ -25,10 +25,10 @@ namespace RecreateMeGenetics
         //Constructor of a random color
         public EvoColor()
         {
-            red = Probability.GetRandom(0, 255);
-            green = Probability.GetRandom(0, 255);
-            blue = Probability.GetRandom(0, 255);
-            alpha = Probability.GetRandom(20, 40);
+            red = Numbers.GetRandom(0, 255);
+            green = Numbers.GetRandom(0, 255);
+            blue = Numbers.GetRandom(0, 255);
+            alpha = Numbers.GetRandom(20, 40);
         }
 
         private EvoColor(int r, int g, int b, int a)
@@ -44,27 +44,27 @@ namespace RecreateMeGenetics
         public void Mutate(EvoDrawing parent)
         {
             //Red mutation
-            if (Probability.MutationShouldOccur(Probability.prob))
+            if (Numbers.MutationShouldOccur(Numbers.prob))
             {
-                red = Probability.GetRandom(0, 255);
+                red = Numbers.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Green mutation
-            if (Probability.MutationShouldOccur(Probability.prob))
+            if (Numbers.MutationShouldOccur(Numbers.prob))
             {
-                green = Probability.GetRandom(0, 255);
+                green = Numbers.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Blue mutation
-            if (Probability.MutationShouldOccur(Probability.prob))
+            if (Numbers.MutationShouldOccur(Numbers.prob))
             {
-                blue = Probability.GetRandom(0, 255);
+                blue = Numbers.GetRandom(0, 255);
                 parent.NeedRepaint = true;
             }
             //Alpha mutation
-            if (Probability.MutationShouldOccur(Probability.prob))
+            if (Numbers.MutationShouldOccur(Numbers.prob))
             {
-                alpha = Probability.GetRandom(0, 255);
+                alpha = Numbers.GetRandom(30, 60);
                 parent.NeedRepaint = true;
             }
         }

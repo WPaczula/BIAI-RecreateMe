@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using RecreateMeUtils;
+using System;
 
 namespace RecreateMeGenetics
 {
-    public static class EvolutionManager
+    public class EvolutionManager
     {
         public static double Fitness(EvoDrawing drawing, byte[] image)
         {
             double fitness = 0;
-            byte[] colors = drawing.ToColors();
-            for(int i=0; i<colors.Count(); i+=3)
+            var fDrawing = BitmapConverter.FloatTableFrom(drawing.ToColors());
+            var fImage = BitmapConverter.FloatTableFrom(image);
+
+            for(int i=0; i<fDrawing.Count(); i+=3)
             {
-                fitness += Math.Abs(colors[i] - image[i]) 
-                    + Math.Abs(colors[i + 1] - image[i + 1]) 
-                    + Math.Abs(colors[i + 2] - image[i + 2]);
+                fitness += Math.Abs(fDrawing[i] - fImage[i])
+                    + Math.Abs(fDrawing[i + 1] - fImage[i + 1])
+                    + Math.Abs(fDrawing[i + 2] - fImage[i + 2]);
             }
             return fitness;
         }
     }
+
+
 }

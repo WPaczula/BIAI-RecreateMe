@@ -5,3 +5,10 @@ C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeGenet
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.csprojResolveAssemblyReference.cache
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.dll
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\bin\Debug\RecreateMeGenetics.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\bin\Debug\RecreateMeGenetics.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\bin\Debug\RecreateMeUtils.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\bin\Debug\RecreateMeUtils.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeGenetics\obj\Debug\RecreateMeGenetics.pdb

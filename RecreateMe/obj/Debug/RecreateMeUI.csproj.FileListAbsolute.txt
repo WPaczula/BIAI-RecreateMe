@@ -11,3 +11,16 @@ C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.dll
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeGenetics.pdb
 C:\Users\Wojtek\Documents\Visual Studio 2015\Projects\RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe.config
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.exe
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMe.exe
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMe.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMeGenetics.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMeGenetics.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\RecreateMeUtils.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMeUI.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.RecreateMe.resources
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.Properties.Resources.resources
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMeUI.csproj.GenerateResource.Cache

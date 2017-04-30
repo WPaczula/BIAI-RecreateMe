@@ -62,6 +62,10 @@ namespace RecreateMeGenetics
             needRepaint = false;
             MinShapePoints = minShapePoints;
             MaxShapePoints = maxShapePoints;
+            for(int i=0; i<5; i++)
+            {
+                shapes.Add(new EvoShape(MinShapePoints, MaxShapePoints));
+            }
         }
 
         //TODO change mutation rates to variables
@@ -74,30 +78,30 @@ namespace RecreateMeGenetics
             }
 
             //Add shape
-            if (Probability.MutationShouldOccur(Probability.prob*2))
+            if (Numbers.MutationShouldOccur(Numbers.prob*2))
             {
                 shapes.Insert(
-                    Probability.GetRandom(0, shapes.Count), 
+                    Numbers.GetRandom(0, shapes.Count), 
                         new EvoShape(MinShapePoints, MaxShapePoints));
                 NeedRepaint = true;
             }
             //Change layer
-            if(shapes.Count > 1 && Probability.MutationShouldOccur(Probability.prob * 2))
+            if(shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob * 2))
             {
-                int i = Probability.GetRandom(0, shapes.Count);
+                int i = Numbers.GetRandom(0, shapes.Count);
                 EvoShape p = shapes.ElementAt(i);
                 shapes.RemoveAt(i);
-                i = Probability.GetRandom(0, shapes.Count);
+                i = Numbers.GetRandom(0, shapes.Count);
                 shapes.Insert(i, p);
 
             }
             //Remove shape
             //TODO Considering minimum shapes variable or deleting first part of if statement
-            if (shapes.Count > 1 && Probability.MutationShouldOccur(Probability.prob))
+            if (shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob))
             {
                 shapes.Remove(
                     shapes.ElementAt(
-                        Probability.GetRandom(0, shapes.Count)));
+                        Numbers.GetRandom(0, shapes.Count)));
                 NeedRepaint = true;
             }
         }
@@ -111,22 +115,21 @@ namespace RecreateMeGenetics
                 foreach (var shape in shapes)
                 {
                     Point[] scaled = shape.getPoints();
-                    if (resizeFactor > 1)
+
+                    for (int i = 0; i < scaled.Count(); i++)
                     {
-                        for (int i = 0; i < scaled.Count(); i++)
-                        {
-                            scaled[i].X = (int)(scaled[i].X / resizeFactor);
-                            scaled[i].Y = (int)(scaled[i].Y / resizeFactor);
-                        }
-                        switch (drawingShape)
-                        {
-                            case ShapeType.elipse:
-                                graphic.FillClosedCurve(shape.getBrush(), scaled);
-                                break;
-                            case ShapeType.polygon:
-                                graphic.FillPolygon(shape.getBrush(), scaled);
-                                break;
-                        }
+                        scaled[i].X = (int)((float)scaled[i].X / resizeFactor);
+                        scaled[i].Y = (int)((float)scaled[i].Y / resizeFactor);
+                    }
+
+                    switch (drawingShape)
+                    {
+                        case ShapeType.elipse:
+                            graphic.FillClosedCurve(shape.getBrush(), scaled);
+                            break;
+                        case ShapeType.polygon:
+                            graphic.FillPolygon(shape.getBrush(), scaled);
+                            break;
                     }
                 }
             }
@@ -134,35 +137,10 @@ namespace RecreateMeGenetics
 
         public byte[] ToColors()
         {
-            /*double error = 0;
-
-            using (var b = new Bitmap(Tools.MaxWidth, Tools.MaxHeight, PixelFormat.Format24bppRgb))
-            using (Graphics g = Graphics.FromImage(b))
-            {
-                Renderer.Render(newDrawing, g, 1);
-
-                BitmapData bmd1 = b.LockBits(new Rectangle(0, 0, Tools.MaxWidth, Tools.MaxHeight), ImageLockMode.ReadOnly,
-                                             PixelFormat.Format24bppRgb);
-
-
-                for (int y = 0; y < Tools.MaxHeight; y++)
-                {
-                    for (int x = 0; x < Tools.MaxWidth; x++)
-                    {
-                        Color c1 = GetPixel(bmd1, x, y);
-                        Color c2 = sourceColors[x, y];
-
-                        double pixelError = GetColorFitness(c1, c2);
-                        error += pixelError;
-                    }
-                }
-
-                b.UnlockBits(bmd1);*/
-            var templateBitmap = new Bitmap(Probability.MaxWidth, Probability.MaxHeight, PixelFormat.Format24bppRgb);
+            var templateBitmap = new Bitmap(Numbers.MaxWidth, Numbers.MaxHeight, PixelFormat.Format24bppRgb);
             Graphics graphic = Graphics.FromImage(templateBitmap);
             Draw(graphic, Color.Black, shape, 1);
             return BitmapConverter.ByteTableFrom(templateBitmap);
-
         }
     }
 }

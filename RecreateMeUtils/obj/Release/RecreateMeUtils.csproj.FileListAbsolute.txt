@@ -1,0 +1,5 @@
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeUtils\obj\Release\RecreateMeUtils.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeUtils\bin\Release\RecreateMeUtils.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeUtils\bin\Release\RecreateMeUtils.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeUtils\obj\Release\RecreateMeUtils.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMeUtils\obj\Release\RecreateMeUtils.pdb

@@ -52,18 +52,18 @@ namespace RecreateMeGenetics
 
         public EvoShape Clone()
         {
-            var list = new List<EvoPoint>();
-            foreach (var point in shapePoints)
-            {
-                list.Add(point.Clone());
-            }
-            return new EvoShape(list, Color, MinPoints, MaxPoints);
+            return new EvoShape(shapePoints, Color, MinPoints, MaxPoints);
         }
 
         private EvoShape(List<EvoPoint> points, EvoColor color, int minPoints, int maxPoints)
         {
-            shapePoints = points;
-            Color = color;
+
+            shapePoints = new List<EvoPoint>();
+            foreach (var point in points)
+            {
+                shapePoints.Add(point.Clone());
+            }
+            Color = color.Clone();
             MinPoints = minPoints;
             MaxPoints = maxPoints;
         }

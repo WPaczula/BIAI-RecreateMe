@@ -6,11 +6,14 @@ using RecreateMeGenetics;
 using RecreateMeUtils;
 using System.Threading;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RecreateMe
 {
     public partial class RecreateMe : Form
     {
+        private long generation = 0;
+        private long childrenSelected = 0;
         private double fitness = double.MaxValue;
         //Evolution thread
         private Thread evoThread;
@@ -98,7 +101,11 @@ namespace RecreateMe
             safeDialog.Filter = "Image Files(*.BMG)|*.BMP";
             if (safeDialog.ShowDialog() == DialogResult.OK)
             {
-                //save drawing to file
+                var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
+                Graphics graphic = Graphics.FromImage(templateBitmap);
+                //TODO add user's choice
+                drawingToBeShown.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
+                templateBitmap.Save(safeDialog.FileName);
             }
         }
 
@@ -121,27 +128,73 @@ namespace RecreateMe
         //Evolve algorithm
         public void Evolve()
         {
-            double childsFitness = 0;
+            //double childsFitness = 0;
+            //while (true)
+            //{
+            //    EvoDrawing child;
+            //    lock (drawingData)
+            //    {
+            //        child = drawingData.Clone();
+            //    }
+            //    child.Mutate();
+            //    if (child.NeedRepaint)
+            //    {
+            //        childsFitness = EvolutionManager.Fitness(child, colorTable);
+            //        if (fitness > childsFitness)
+            //        {
+            //            lock (drawingData)
+            //            {
+            //                drawingData = child;
+            //            }
+            //            fitness = childsFitness;
+            //        }
+            //    }
+            //}
             while (true)
             {
-                EvoDrawing child;
+                generation++;
                 lock (drawingData)
                 {
-                    child = drawingData.Clone();
+                    for (int i = 0; i < children.Length; i++)
+                    {
+                        children[i] = drawingData.Clone();
+                    }
                 }
-                child.Mutate();
-                childsFitness = EvolutionManager.Fitness(child, colorTable);
-                if (fitness > childsFitness)
+
+                foreach (var child in children)
+                {
+                    child.Mutate();
+                    if (child.NeedRepaint)
+                            child.Fitness = EvolutionManager.Fitness(child, colorTable);
+                    else
+                        child.Fitness = int.MaxValue;
+                }
+
+                int minFitness = children[0].Fitness;
+                int minFitnessIndex = 0;
+                for (int i = 1; i < children.Length; i++)
+                {
+                    if (children[i].Fitness < minFitness)
+                    {
+                        minFitness = children[i].Fitness;
+                        minFitnessIndex = i;
+                    }
+                }
+
+                if (children[minFitnessIndex].Fitness < fitness)
                 {
                     lock (drawingData)
                     {
-                        drawingData = child;
+                        drawingData = children[minFitnessIndex];
                     }
-                    fitness = childsFitness;
-                    drawingData.NeedRepaint = true;
+                    fitness = children[minFitnessIndex].Fitness;
+                    childrenSelected++;
                 }
             }
         }
+
+        private int[] childFitness = new int[5];
+        private EvoDrawing[] children = new EvoDrawing[5];
 
         private void startEvolution()
         {
@@ -165,16 +218,18 @@ namespace RecreateMe
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
-            if (drawingData.NeedRepaint)
+            lock (drawingData)
             {
-                lock (drawingData)
+                if (drawingData.NeedRepaint)
                 {
+                    drawing.Invalidate();
                     drawingToBeShown = drawingData.Clone();
+                    drawingData.NeedRepaint = false;
                 }
-                drawingData.NeedRepaint = false;
-                drawing.Invalidate();
             }
-
+            generationLabel.Text = generation.ToString();
+            childrenNumberLabel.Text = childrenSelected.ToString();
+            fitnessLabel.Text = fitness.ToString();
         }
 
         private void drawing_Paint(object sender, PaintEventArgs e)

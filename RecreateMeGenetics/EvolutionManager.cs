@@ -6,19 +6,21 @@ namespace RecreateMeGenetics
 {
     public class EvolutionManager
     {
-        public static double Fitness(EvoDrawing drawing, byte[] image)
+        public static int Fitness(EvoDrawing drawing, byte[] image)
         {
-            double fitness = 0;
-            var fDrawing = BitmapConverter.FloatTableFrom(drawing.ToColors());
-            var fImage = BitmapConverter.FloatTableFrom(image);
+            int fitness = 0;
+            var bytesDrawing = drawing.ToColors();
 
-            for(int i=0; i<fDrawing.Count(); i+=3)
+            for(int i=0; i< bytesDrawing.Count(); i++)
             {
-                fitness += Math.Abs(fDrawing[i] - fImage[i])
-                    + Math.Abs(fDrawing[i + 1] - fImage[i + 1])
-                    + Math.Abs(fDrawing[i + 2] - fImage[i + 2]);
+                fitness += (bytesDrawing[i] - image[i]) * (bytesDrawing[i] - image[i]); 
             }
             return fitness;
+        }
+
+        public static EvoDrawing Crossover(EvoDrawing firstParent, EvoDrawing secondParent)
+        {
+            return null;
         }
     }
 

@@ -17,6 +17,7 @@ namespace RecreateMeGenetics
     //Class of a single drawing
     public class EvoDrawing
     {
+        public int Fitness { get; set; }
         //Shape used for drawing 
         private ShapeType shape;
         //List containing figures on the drawing
@@ -50,7 +51,11 @@ namespace RecreateMeGenetics
 
         private EvoDrawing(List<EvoShape> shapeList, ShapeType type, int minPoints, int maxPoints )
         {
-            shapes = shapeList;
+            shapes = new List<EvoShape>();
+            foreach (var shape in shapeList)
+            {
+                shapes.Add(shape.Clone());
+            }
             shape = type;
             minShapePoints = minPoints;
             MaxShapePoints = maxPoints;
@@ -62,31 +67,26 @@ namespace RecreateMeGenetics
             needRepaint = false;
             MinShapePoints = minShapePoints;
             MaxShapePoints = maxShapePoints;
-            for(int i=0; i<5; i++)
-            {
-                shapes.Add(new EvoShape(MinShapePoints, MaxShapePoints));
-            }
         }
 
         //TODO change mutation rates to variables
         public void Mutate()
         {
-
             foreach (var figure in shapes)
             {
                 figure.Mutate(this);
             }
 
             //Add shape
-            if (Numbers.MutationShouldOccur(Numbers.prob*2))
+            if (Numbers.MutationShouldOccur(Numbers.prob * 2))
             {
                 shapes.Insert(
-                    Numbers.GetRandom(0, shapes.Count), 
+                    Numbers.GetRandom(0, shapes.Count),
                         new EvoShape(MinShapePoints, MaxShapePoints));
                 NeedRepaint = true;
             }
             //Change layer
-            if(shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob * 2))
+            if (shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob * 2))
             {
                 int i = Numbers.GetRandom(0, shapes.Count);
                 EvoShape p = shapes.ElementAt(i);
@@ -109,28 +109,25 @@ namespace RecreateMeGenetics
         //TODO add more types???
         public void Draw(Graphics graphic, Color backgroundColor, ShapeType drawingShape, double resizeFactor)
         {
-            lock(this)
+            graphic.Clear(backgroundColor);
+            foreach (var shape in shapes)
             {
-                graphic.Clear(backgroundColor);
-                foreach (var shape in shapes)
+                Point[] scaled = shape.getPoints();
+
+                for (int i = 0; i < scaled.Count(); i++)
                 {
-                    Point[] scaled = shape.getPoints();
+                    scaled[i].X = (int)((double)scaled[i].X / resizeFactor);
+                    scaled[i].Y = (int)((double)scaled[i].Y / resizeFactor);
+                }
 
-                    for (int i = 0; i < scaled.Count(); i++)
-                    {
-                        scaled[i].X = (int)((float)scaled[i].X / resizeFactor);
-                        scaled[i].Y = (int)((float)scaled[i].Y / resizeFactor);
-                    }
-
-                    switch (drawingShape)
-                    {
-                        case ShapeType.elipse:
-                            graphic.FillClosedCurve(shape.getBrush(), scaled);
-                            break;
-                        case ShapeType.polygon:
-                            graphic.FillPolygon(shape.getBrush(), scaled);
-                            break;
-                    }
+                switch (drawingShape)
+                {
+                    case ShapeType.elipse:
+                        graphic.FillClosedCurve(shape.getBrush(), scaled);
+                        break;
+                    case ShapeType.polygon:
+                        graphic.FillPolygon(shape.getBrush(), scaled);
+                        break;
                 }
             }
         }

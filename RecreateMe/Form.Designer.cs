@@ -40,14 +40,14 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.timeLabel = new System.Windows.Forms.Label();
-            this.timeHeaderLabel = new System.Windows.Forms.Label();
             this.generationLabel = new System.Windows.Forms.Label();
             this.generationHeaderLabel = new System.Windows.Forms.Label();
             this.fitnessLabel = new System.Windows.Forms.Label();
             this.fitnessHeaderLabel = new System.Windows.Forms.Label();
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
             this.drawing = new Drawing();
+            this.label1 = new System.Windows.Forms.Label();
+            this.childrenNumberLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -57,7 +57,7 @@
             // 
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(12, 373);
+            this.startButton.Location = new System.Drawing.Point(12, 399);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(125, 33);
             this.startButton.TabIndex = 0;
@@ -73,7 +73,7 @@
             this.exitToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(979, 24);
+            this.menuStrip.Size = new System.Drawing.Size(960, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -119,7 +119,7 @@
             this.originalPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.originalPictureBox.Location = new System.Drawing.Point(143, 32);
             this.originalPictureBox.Name = "originalPictureBox";
-            this.originalPictureBox.Size = new System.Drawing.Size(399, 374);
+            this.originalPictureBox.Size = new System.Drawing.Size(400, 400);
             this.originalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.originalPictureBox.TabIndex = 2;
             this.originalPictureBox.TabStop = false;
@@ -130,37 +130,18 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.timeLabel);
-            this.groupBox1.Controls.Add(this.timeHeaderLabel);
+            this.groupBox1.Controls.Add(this.childrenNumberLabel);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.generationLabel);
             this.groupBox1.Controls.Add(this.generationHeaderLabel);
             this.groupBox1.Controls.Add(this.fitnessLabel);
             this.groupBox1.Controls.Add(this.fitnessHeaderLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 339);
+            this.groupBox1.Size = new System.Drawing.Size(125, 365);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(7, 125);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(53, 13);
-            this.timeLabel.TabIndex = 5;
-            this.timeLabel.Text = "Unknown";
-            // 
-            // timeHeaderLabel
-            // 
-            this.timeHeaderLabel.AutoSize = true;
-            this.timeHeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.timeHeaderLabel.Location = new System.Drawing.Point(7, 112);
-            this.timeHeaderLabel.Name = "timeHeaderLabel";
-            this.timeHeaderLabel.Size = new System.Drawing.Size(38, 13);
-            this.timeHeaderLabel.TabIndex = 4;
-            this.timeHeaderLabel.Text = "Time:";
             // 
             // generationLabel
             // 
@@ -209,16 +190,35 @@
             // 
             this.drawing.Location = new System.Drawing.Point(548, 32);
             this.drawing.Name = "drawing";
-            this.drawing.Size = new System.Drawing.Size(422, 374);
+            this.drawing.Size = new System.Drawing.Size(400, 400);
             this.drawing.TabIndex = 4;
             this.drawing.Text = "Drawing";
             this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(7, 114);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Picked children:";
+            // 
+            // childrenNumberLabel
+            // 
+            this.childrenNumberLabel.AutoSize = true;
+            this.childrenNumberLabel.Location = new System.Drawing.Point(7, 127);
+            this.childrenNumberLabel.Name = "childrenNumberLabel";
+            this.childrenNumberLabel.Size = new System.Drawing.Size(53, 13);
+            this.childrenNumberLabel.TabIndex = 5;
+            this.childrenNumberLabel.Text = "Unknown";
             // 
             // RecreateMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 418);
+            this.ClientSize = new System.Drawing.Size(960, 444);
             this.Controls.Add(this.drawing);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.originalPictureBox);
@@ -251,14 +251,14 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.GroupBox groupBox1;
         private Drawing drawing;
-        private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.Label timeHeaderLabel;
         private System.Windows.Forms.Label generationLabel;
         private System.Windows.Forms.Label generationHeaderLabel;
         private System.Windows.Forms.Label fitnessLabel;
         private System.Windows.Forms.Label fitnessHeaderLabel;
         private System.Windows.Forms.Timer redrawGenerator;
         private System.Windows.Forms.ToolStripMenuItem geneticsToolStripMenuItem;
+        private System.Windows.Forms.Label childrenNumberLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
 

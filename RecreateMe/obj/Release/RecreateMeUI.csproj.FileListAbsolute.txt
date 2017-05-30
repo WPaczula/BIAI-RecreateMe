@@ -1,0 +1,13 @@
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMeUI.csprojResolveAssemblyReference.cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.RecreateMe.resources
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.Properties.Resources.resources
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMeUI.csproj.GenerateResource.Cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMe.exe.config
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMe.exe
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMe.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMeGenetics.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMeUtils.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMeGenetics.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMeUtils.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.exe
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.pdb

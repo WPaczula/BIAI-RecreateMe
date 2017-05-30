@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace RecreateMeUtils
 {
@@ -18,29 +19,13 @@ namespace RecreateMeUtils
 
             //Get data pointer
             IntPtr ptr = bmpData.Scan0;
-            int bytes = Math.Abs(bmpData.Stride) * bitmap.Height;
-            byte[] rgbValues = new byte[bytes];
+            int bytesNumber = Math.Abs(bmpData.Stride) * bitmap.Height;
+            byte[] rgbValues = new byte[bytesNumber];
 
             //Copy the RGB values into the array.
-            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytesNumber);
             bitmap.UnlockBits(bmpData);
             return rgbValues;
-        }
-
-        public static float[] FloatTableFrom(Bitmap bitmap)
-        {
-            var table = ByteTableFrom(bitmap);
-            return FloatTableFrom(table);
-        }
-
-        public static float[] FloatTableFrom(byte[] table)
-        {
-            float[] output = new float[table.Count()];
-            for (int i = 0; i < table.Count(); i++)
-            {
-                output[i] = (float)table[i] / 255f;
-            }
-            return output;
         }
     }
 }

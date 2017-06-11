@@ -97,7 +97,7 @@ namespace RecreateMeGenetics
             }
 
             //Add point to shape
-            if (shapePoints.Count < MaxPoints && Numbers.MutationShouldOccur(Numbers.prob))
+            if (shapePoints.Count < MaxPoints && Numbers.ProbabilityFulfilled(Numbers.AddPointMutationProbability))
             {
                 parent.NeedRepaint = true;
 
@@ -108,7 +108,7 @@ namespace RecreateMeGenetics
                 shapePoints.Insert(i, additionalPoint);
             }
             //Delete point
-            if(shapePoints.Count > MinPoints && Numbers.MutationShouldOccur(Numbers.prob))
+            if(shapePoints.Count > MinPoints && Numbers.ProbabilityFulfilled(Numbers.RemovePointmutationProbability))
             {
                 parent.NeedRepaint = true;
                 shapePoints.Remove(

@@ -27,6 +27,21 @@ namespace RecreateMeUtils
             bitmap.UnlockBits(bmpData);
             return rgbValues;
         }
+
+        public static float[] FloatTableFrom(Bitmap bitmap)
+        {
+            return getFloats(ByteTableFrom(bitmap));
+        }
+
+        public static float[] getFloats(byte[] table)
+        {
+            float[] newTable = new float[table.Length];
+            for (int i = 0; i < table.Length; i++)
+            {
+                newTable[i] = (float)table[i] / 255f;
+            }
+            return newTable;
+        }
     }
 }
 

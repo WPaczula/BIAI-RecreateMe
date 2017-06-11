@@ -24,3 +24,7 @@ C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.RecreateMe.resources
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.Properties.Resources.resources
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMeUI.csproj.GenerateResource.Cache
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\MoreLinq.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\System.ValueTuple.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Debug\MoreLinq.xml
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Debug\RecreateMe.GeneticsForm.resources

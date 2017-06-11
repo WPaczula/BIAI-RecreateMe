@@ -46,31 +46,34 @@ namespace RecreateMeGenetics
         //TODO add mutation rates and min/max move values
         public void Mutate(EvoDrawing parent)
         {
-            //TODO add probability variable
-            
-            //TODO add more move if statements???
-            //move the point by random change between set values
-            if (Numbers.MutationShouldOccur(Numbers.prob))
+
+            if (Numbers.ProbabilityFulfilled(Numbers.PointMoveMutationProbability))
             {
-                //TODO add min and max move distance variables
                 X = Math.Min(
-                    Math.Max(
-                        0, X + Numbers.GetRandom(-5, 5)), Numbers.MaxWidth);
+                   Math.Max(
+                       0, X + Numbers.GetRandom(-Numbers.FirstRange, Numbers.FirstRange)), Numbers.MaxWidth);
                 Y = Math.Min(
                     Math.Max
-                    (0, Y + Numbers.GetRandom(-5, 5)), Numbers.MaxHeight);
+                    (0, Y + Numbers.GetRandom(-Numbers.FirstRange, Numbers.FirstRange)), Numbers.MaxHeight);
                 parent.NeedRepaint = true;
             }
 
-            if (Numbers.MutationShouldOccur(Numbers.prob))
+
+            if (Numbers.ProbabilityFulfilled(Numbers.PointMoveMutationProbability))
             {
-                //TODO add min and max move distance variables
                 X = Math.Min(
-                    Math.Max(
-                        0, X + Numbers.GetRandom(-10, 10)), Numbers.MaxWidth);
+                   Math.Max(
+                       0, X + Numbers.GetRandom(-Numbers.SecondRange, Numbers.SecondRange)), Numbers.MaxWidth);
                 Y = Math.Min(
                     Math.Max
-                    (0, Y + Numbers.GetRandom(-10, 10)), Numbers.MaxHeight);
+                    (0, Y + Numbers.GetRandom(-Numbers.SecondRange, Numbers.SecondRange)), Numbers.MaxHeight);
+                parent.NeedRepaint = true;
+            }
+
+            if (Numbers.ProbabilityFulfilled(Numbers.PointMoveMutationProbability))
+            {
+                X =  Numbers.GetRandom(1, Numbers.MaxWidth);
+                Y = Numbers.GetRandom(1, Numbers.MaxHeight);
                 parent.NeedRepaint = true;
             }
         }

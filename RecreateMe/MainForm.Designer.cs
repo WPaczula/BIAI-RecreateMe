@@ -40,14 +40,20 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numberOfShapesLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.polygonRadio = new System.Windows.Forms.RadioButton();
+            this.elipseRadio = new System.Windows.Forms.RadioButton();
+            this.childrenNumberLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.generationLabel = new System.Windows.Forms.Label();
             this.generationHeaderLabel = new System.Windows.Forms.Label();
             this.fitnessLabel = new System.Windows.Forms.Label();
             this.fitnessHeaderLabel = new System.Windows.Forms.Label();
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
             this.drawing = new Drawing();
-            this.label1 = new System.Windows.Forms.Label();
-            this.childrenNumberLabel = new System.Windows.Forms.Label();
+            this.resetButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -57,9 +63,10 @@
             // 
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(12, 399);
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startButton.Location = new System.Drawing.Point(12, 336);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(125, 33);
+            this.startButton.Size = new System.Drawing.Size(125, 43);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -130,6 +137,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numberOfShapesLabel);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.polygonRadio);
+            this.groupBox1.Controls.Add(this.elipseRadio);
             this.groupBox1.Controls.Add(this.childrenNumberLabel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.generationLabel);
@@ -138,10 +150,81 @@
             this.groupBox1.Controls.Add(this.fitnessHeaderLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 365);
+            this.groupBox1.Size = new System.Drawing.Size(125, 302);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
+            // 
+            // numberOfShapesLabel
+            // 
+            this.numberOfShapesLabel.AutoSize = true;
+            this.numberOfShapesLabel.Location = new System.Drawing.Point(6, 171);
+            this.numberOfShapesLabel.Name = "numberOfShapesLabel";
+            this.numberOfShapesLabel.Size = new System.Drawing.Size(53, 13);
+            this.numberOfShapesLabel.TabIndex = 10;
+            this.numberOfShapesLabel.Text = "Unknown";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(5, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Number of shapes";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(6, 206);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Shape type";
+            // 
+            // polygonRadio
+            // 
+            this.polygonRadio.AutoSize = true;
+            this.polygonRadio.Location = new System.Drawing.Point(6, 249);
+            this.polygonRadio.Name = "polygonRadio";
+            this.polygonRadio.Size = new System.Drawing.Size(62, 17);
+            this.polygonRadio.TabIndex = 7;
+            this.polygonRadio.TabStop = true;
+            this.polygonRadio.Text = "polygon";
+            this.polygonRadio.UseVisualStyleBackColor = true;
+            // 
+            // elipseRadio
+            // 
+            this.elipseRadio.AutoSize = true;
+            this.elipseRadio.Location = new System.Drawing.Point(6, 225);
+            this.elipseRadio.Name = "elipseRadio";
+            this.elipseRadio.Size = new System.Drawing.Size(52, 17);
+            this.elipseRadio.TabIndex = 6;
+            this.elipseRadio.TabStop = true;
+            this.elipseRadio.Text = "elipse";
+            this.elipseRadio.UseVisualStyleBackColor = true;
+            this.elipseRadio.CheckedChanged += new System.EventHandler(this.elipseRadio_CheckedChanged);
+            // 
+            // childrenNumberLabel
+            // 
+            this.childrenNumberLabel.AutoSize = true;
+            this.childrenNumberLabel.Location = new System.Drawing.Point(7, 127);
+            this.childrenNumberLabel.Name = "childrenNumberLabel";
+            this.childrenNumberLabel.Size = new System.Drawing.Size(53, 13);
+            this.childrenNumberLabel.TabIndex = 5;
+            this.childrenNumberLabel.Text = "Unknown";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(7, 114);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Picked children:";
             // 
             // generationLabel
             // 
@@ -195,30 +278,22 @@
             this.drawing.Text = "Drawing";
             this.drawing.Paint += new System.Windows.Forms.PaintEventHandler(this.drawing_Paint);
             // 
-            // label1
+            // resetButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(7, 114);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Picked children:";
-            // 
-            // childrenNumberLabel
-            // 
-            this.childrenNumberLabel.AutoSize = true;
-            this.childrenNumberLabel.Location = new System.Drawing.Point(7, 127);
-            this.childrenNumberLabel.Name = "childrenNumberLabel";
-            this.childrenNumberLabel.Size = new System.Drawing.Size(53, 13);
-            this.childrenNumberLabel.TabIndex = 5;
-            this.childrenNumberLabel.Text = "Unknown";
+            this.resetButton.Location = new System.Drawing.Point(13, 385);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(124, 47);
+            this.resetButton.TabIndex = 5;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // RecreateMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 444);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.drawing);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.originalPictureBox);
@@ -256,9 +331,15 @@
         private System.Windows.Forms.Label fitnessLabel;
         private System.Windows.Forms.Label fitnessHeaderLabel;
         private System.Windows.Forms.Timer redrawGenerator;
-        private System.Windows.Forms.ToolStripMenuItem geneticsToolStripMenuItem;
         private System.Windows.Forms.Label childrenNumberLabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem geneticsToolStripMenuItem;
+        private System.Windows.Forms.Label numberOfShapesLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton polygonRadio;
+        private System.Windows.Forms.RadioButton elipseRadio;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 

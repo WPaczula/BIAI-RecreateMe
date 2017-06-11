@@ -7,14 +7,21 @@ using RecreateMeUtils;
 using System.Threading;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace RecreateMe
 {
     public partial class RecreateMe : Form
     {
-        private long generation = 0;
-        private long childrenSelected = 0;
-        private double fitness = double.MaxValue;
+        //Shape used to paint
+        private ShapeType shapeType = ShapeType.elipse;
+        //Number of the current generation
+        private long generation;
+        //Number of steps forward to the solution
+        private long childrenSelected;
+        //Fitness of current solution
+        private double fitness;
         //Evolution thread
         private Thread evoThread;
         //Bitmap to image scale
@@ -22,7 +29,7 @@ namespace RecreateMe
         //Bitmap of the original image
         private Bitmap originalBitmap;
         //Table containing colors of original image
-        private byte[] colorTable;
+        private float[] colorTable;
         //Rectangle bordering the image
         private Rectangle imageRectangle;
         //Program running
@@ -31,10 +38,12 @@ namespace RecreateMe
         private EvoDrawing drawingData;
         //drawing being shown on gui
         private EvoDrawing drawingToBeShown;
-        private int tryout = 0;
+        //curent children
+        private List<EvoDrawing> parents;
         public RecreateMe()
         {
             InitializeComponent();
+            elipseRadio.Checked = true;
             duringDrawing = false;
             originalBitmap = (Bitmap)originalPictureBox.Image;
         }
@@ -44,6 +53,7 @@ namespace RecreateMe
         {
             //Enable components
             startButton.Enabled = true;
+            resetButton.Enabled = true;
             //Allow to choose file
             var fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Image Files(*.BMG)|*.BMP";
@@ -62,12 +72,10 @@ namespace RecreateMe
                     location.Offset(0, getYOffset(originalBitmap, originalPictureBox, drawing));
                     drawing.Location = location;
                     //Set up colors of the original image
-                    colorTable = BitmapConverter.ByteTableFrom(originalBitmap);
+                    colorTable = BitmapConverter.FloatTableFrom(originalBitmap);
                     Numbers.MaxHeight = originalBitmap.Height;
                     Numbers.MaxWidth = originalBitmap.Width;
-                    //TODO change values to variables
-                    drawingData = new EvoDrawing(3, 10);
-                    drawingToBeShown = drawingData.Clone();
+                    setupStart();
                     this.Invalidate();
                 }
                 catch (Exception ex)
@@ -118,7 +126,7 @@ namespace RecreateMe
         //Start or stop algorithm 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if(duringDrawing)
+            if (duringDrawing)
                 stopEvolution();
             else
                 startEvolution();
@@ -128,78 +136,45 @@ namespace RecreateMe
         //Evolve algorithm
         public void Evolve()
         {
-            //double childsFitness = 0;
-            //while (true)
-            //{
-            //    EvoDrawing child;
-            //    lock (drawingData)
-            //    {
-            //        child = drawingData.Clone();
-            //    }
-            //    child.Mutate();
-            //    if (child.NeedRepaint)
-            //    {
-            //        childsFitness = EvolutionManager.Fitness(child, colorTable);
-            //        if (fitness > childsFitness)
-            //        {
-            //            lock (drawingData)
-            //            {
-            //                drawingData = child;
-            //            }
-            //            fitness = childsFitness;
-            //        }
-            //    }
-            //}
             while (true)
             {
                 generation++;
-                lock (drawingData)
-                {
-                    for (int i = 0; i < children.Length; i++)
-                    {
-                        children[i] = drawingData.Clone();
-                    }
-                }
-
+                var children = EvolutionManager.Crossover(Numbers.GenerationQuantity, parents.ElementAt(0), parents.ElementAt(1));
                 foreach (var child in children)
                 {
                     child.Mutate();
-                    if (child.NeedRepaint)
-                            child.Fitness = EvolutionManager.Fitness(child, colorTable);
-                    else
-                        child.Fitness = int.MaxValue;
+                    child.Fitness = EvolutionManager.Fitness(child, colorTable);
                 }
 
-                int minFitness = children[0].Fitness;
-                int minFitnessIndex = 0;
-                for (int i = 1; i < children.Length; i++)
+                children = (from child in children
+                            orderby child.Fitness
+                            select child).ToList();
+                var mostFitChild = children.First();
+                if (mostFitChild.NeedRepaint)
                 {
-                    if (children[i].Fitness < minFitness)
+                    if (fitness > mostFitChild.Fitness)
                     {
-                        minFitness = children[i].Fitness;
-                        minFitnessIndex = i;
+                        childrenSelected++;
+                        fitness = mostFitChild.Fitness;
+                        parents = children;
+                        lock (drawingData)
+                        {
+                            drawingData = mostFitChild;
+                        }
                     }
-                }
-
-                if (children[minFitnessIndex].Fitness < fitness)
-                {
-                    lock (drawingData)
-                    {
-                        drawingData = children[minFitnessIndex];
-                    }
-                    fitness = children[minFitnessIndex].Fitness;
-                    childrenSelected++;
                 }
             }
         }
-
-        private int[] childFitness = new int[5];
-        private EvoDrawing[] children = new EvoDrawing[5];
 
         private void startEvolution()
         {
             redrawGenerator.Start();
             startButton.Text = "Stop";
+            parents = (from parent in parents
+                       orderby parent.Fitness
+                       select parent).ToList();
+            drawingData = parents.ElementAt(0);
+
             evoThread = new Thread(Evolve)
             {
                 IsBackground = true,
@@ -214,19 +189,23 @@ namespace RecreateMe
             startButton.Text = "Start";
             evoThread.Abort();
         }
-        
+
         //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
+            if (drawingData == null)
+                return;
             lock (drawingData)
             {
                 if (drawingData.NeedRepaint)
                 {
-                    drawing.Invalidate();
                     drawingToBeShown = drawingData.Clone();
+                    numberOfShapesLabel.Text = drawingToBeShown.ShapesNumber.ToString();
+                    drawing.Invalidate();
                     drawingData.NeedRepaint = false;
                 }
             }
+
             generationLabel.Text = generation.ToString();
             childrenNumberLabel.Text = childrenSelected.ToString();
             fitnessLabel.Text = fitness.ToString();
@@ -237,17 +216,53 @@ namespace RecreateMe
             if (originalBitmap == null)
                 return;
 
-                var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
-                Graphics graphic = Graphics.FromImage(templateBitmap);
-                //TODO add user's choice
-                drawingToBeShown.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
-                e.Graphics.DrawImage(templateBitmap, 0, 0);
+            var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
+            Graphics graphic = Graphics.FromImage(templateBitmap);
+            drawingToBeShown.Draw(graphic, Color.Black, shapeType, resizeFactor);
+            e.Graphics.DrawImage(templateBitmap, 0, 0);
         }
 
 
         //TODO opening variables form as a dialog and allowing to change values
         private void geneticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form settingsForm = new GeneticsForm();
+            settingsForm.ShowDialog();
+        }
+
+        private void elipseRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (elipseRadio.Checked)
+            {
+                shapeType = ShapeType.elipse;
+            }
+            else
+            {
+                shapeType = ShapeType.polygon;
+            }
+            fitness = Double.MaxValue;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            stopEvolution();
+            setupStart();
+            startEvolution();
+        }
+
+        private void setupStart()
+        {
+            if (parents != null)
+                parents.Clear();
+            else
+                parents = new List<EvoDrawing>();
+            for (int i = 0; i < Numbers.GenerationQuantity; i++)
+            {
+                parents.Add(new EvoDrawing(Numbers.MinPointsPerShape, Numbers.MaxPointsPerShape, colorTable));
+            }
+            generation = 0;
+            childrenSelected = 0;
+            fitness = Double.MaxValue;
         }
     }
 }

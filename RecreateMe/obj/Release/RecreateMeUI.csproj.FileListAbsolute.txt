@@ -11,3 +11,7 @@ C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\RecreateMeUtils.pdb
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.exe
 C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.pdb
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\MoreLinq.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\System.ValueTuple.dll
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\bin\Release\MoreLinq.xml
+C:\Users\Wojtek\Desktop\Wesole_Programowanie\BIAI\BIAI-RecreateMe\RecreateMe\obj\Release\RecreateMe.GeneticsForm.resources

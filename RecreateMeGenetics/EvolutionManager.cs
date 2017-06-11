@@ -1,15 +1,16 @@
 ﻿using System.Linq;
 using RecreateMeUtils;
 using System;
+using System.Collections.Generic;
 
 namespace RecreateMeGenetics
 {
     public class EvolutionManager
     {
-        public static int Fitness(EvoDrawing drawing, byte[] image)
+        public static float Fitness(EvoDrawing drawing, float[] image)
         {
-            int fitness = 0;
-            var bytesDrawing = drawing.ToColors();
+            float fitness = 0;
+            var bytesDrawing = BitmapConverter.getFloats(drawing.ToColors());
 
             for(int i=0; i< bytesDrawing.Count(); i++)
             {
@@ -18,9 +19,22 @@ namespace RecreateMeGenetics
             return fitness;
         }
 
-        public static EvoDrawing Crossover(EvoDrawing firstParent, EvoDrawing secondParent)
+        public static List<EvoDrawing> Crossover(int numberOfChildren, EvoDrawing firstParent, EvoDrawing secondParent)
         {
-            return null;
+            
+            var drawings = new List<EvoDrawing>();
+            for(int i=0; i<numberOfChildren; i++)
+            {
+                if (Numbers.ProbabilityFulfilled(Numbers.CrossoverProbability))
+                {
+                    drawings.Add(firstParent.Crossover(secondParent));
+                }
+                else
+                {
+                    drawings.Add(firstParent.Clone()); 
+                }
+            }
+            return drawings;
         }
     }
 

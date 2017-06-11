@@ -11,17 +11,29 @@ namespace RecreateMeGenetics
 {
     //Possible drawing shapes
     //TODO add more shapes??
-    public enum ShapeType{ elipse, polygon };
+    public enum ShapeType { elipse, polygon };
 
     //TODO: comments and the rest of drawing
     //Class of a single drawing
     public class EvoDrawing
     {
-        public int Fitness { get; set; }
+        public float Fitness { get; set; }
         //Shape used for drawing 
         private ShapeType shape;
         //List containing figures on the drawing
         private List<EvoShape> shapes;
+        //Number of shapes
+        public int ShapesNumber
+        {
+            get
+            {
+                return shapes.Count;
+            }
+            private set
+            {
+                ShapesNumber = value;
+            }
+        }
         //Variable showing if repaint of the drawing is needed
         private bool needRepaint;
         public bool NeedRepaint
@@ -46,10 +58,10 @@ namespace RecreateMeGenetics
 
         public EvoDrawing Clone()
         {
-            return new EvoDrawing(shapes, shape, MinShapePoints, MaxShapePoints);
+            return new EvoDrawing(shapes, shape, MinShapePoints, MaxShapePoints, Fitness);
         }
 
-        private EvoDrawing(List<EvoShape> shapeList, ShapeType type, int minPoints, int maxPoints )
+        private EvoDrawing(List<EvoShape> shapeList, ShapeType type, int minPoints, int maxPoints, float fitness)
         {
             shapes = new List<EvoShape>();
             foreach (var shape in shapeList)
@@ -59,14 +71,36 @@ namespace RecreateMeGenetics
             shape = type;
             minShapePoints = minPoints;
             MaxShapePoints = maxPoints;
+            Fitness = fitness;
         }
 
-        public EvoDrawing(int minShapePoints, int maxShapePoints)
+        public EvoDrawing(int minShapePoints, int maxShapePoints, float[] comparedImage)
         {
             shapes = new List<EvoShape>();
+            for (int i = 0; i < Numbers.StartingShapesNumber; i++)
+            {
+                shapes.Add(new EvoShape(minShapePoints, maxShapePoints));
+            }
             needRepaint = false;
             MinShapePoints = minShapePoints;
             MaxShapePoints = maxShapePoints;
+            Fitness = EvolutionManager.Fitness(this, comparedImage);
+        }
+        public EvoDrawing Crossover(EvoDrawing mate)
+        {
+            List<EvoShape> shapeList = new List<EvoShape>();
+            var mainEnumerator = shapes.GetEnumerator();
+            var mateEnumerator = mate.shapes.GetEnumerator();
+
+            while (mainEnumerator.MoveNext() != false && mateEnumerator.MoveNext() != false)
+            {
+                if (Numbers.ProbabilityFulfilled(Numbers.CrossoverProbability))
+                    shapeList.Add(mainEnumerator.Current.Clone());
+                else
+                    shapeList.Add(mateEnumerator.Current.Clone());
+            }
+
+            return new EvoDrawing(shapeList, shape, MinShapePoints, MaxShapePoints, float.MaxValue);
         }
 
         //TODO change mutation rates to variables
@@ -78,7 +112,7 @@ namespace RecreateMeGenetics
             }
 
             //Add shape
-            if (Numbers.MutationShouldOccur(Numbers.prob * 2))
+            if (Numbers.ProbabilityFulfilled(Numbers.AddShapemutationProbability))
             {
                 shapes.Insert(
                     Numbers.GetRandom(0, shapes.Count),
@@ -86,7 +120,7 @@ namespace RecreateMeGenetics
                 NeedRepaint = true;
             }
             //Change layer
-            if (shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob * 2))
+            if (shapes.Count > 1 && Numbers.ProbabilityFulfilled(Numbers.ChangeLayerOfShapemutationProbability))
             {
                 int i = Numbers.GetRandom(0, shapes.Count);
                 EvoShape p = shapes.ElementAt(i);
@@ -96,8 +130,7 @@ namespace RecreateMeGenetics
 
             }
             //Remove shape
-            //TODO Considering minimum shapes variable or deleting first part of if statement
-            if (shapes.Count > 1 && Numbers.MutationShouldOccur(Numbers.prob))
+            if (shapes.Count > 1 && Numbers.ProbabilityFulfilled(Numbers.RemoveShapemutationProbability))
             {
                 shapes.Remove(
                     shapes.ElementAt(
@@ -106,7 +139,6 @@ namespace RecreateMeGenetics
             }
         }
         //Draw a drawing
-        //TODO add more types???
         public void Draw(Graphics graphic, Color backgroundColor, ShapeType drawingShape, double resizeFactor)
         {
             graphic.Clear(backgroundColor);

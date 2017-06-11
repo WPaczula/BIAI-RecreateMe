@@ -81,6 +81,12 @@
             this.startingShapeNumberLabel = new System.Windows.Forms.Label();
             this.startingShapeNumberBar = new System.Windows.Forms.TrackBar();
             this.label15 = new System.Windows.Forms.Label();
+            this.minAlfaLabel = new System.Windows.Forms.Label();
+            this.minAlfaBar = new System.Windows.Forms.TrackBar();
+            this.label17 = new System.Windows.Forms.Label();
+            this.maxAlfaLabel = new System.Windows.Forms.Label();
+            this.maxAlfaBar = new System.Windows.Forms.TrackBar();
+            this.label18 = new System.Windows.Forms.Label();
             this.ProbabilityTabs.SuspendLayout();
             this.generalTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.generationQuantityBar)).BeginInit();
@@ -102,6 +108,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.removeShapeProbabilityBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addShapeProbabilityBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingShapeNumberBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minAlfaBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAlfaBar)).BeginInit();
             this.SuspendLayout();
             // 
             // ProbabilityTabs
@@ -460,6 +468,12 @@
             // 
             // colorTab
             // 
+            this.colorTab.Controls.Add(this.maxAlfaLabel);
+            this.colorTab.Controls.Add(this.maxAlfaBar);
+            this.colorTab.Controls.Add(this.label18);
+            this.colorTab.Controls.Add(this.minAlfaLabel);
+            this.colorTab.Controls.Add(this.minAlfaBar);
+            this.colorTab.Controls.Add(this.label17);
             this.colorTab.Controls.Add(this.colorChangeProbabilityLabel);
             this.colorTab.Controls.Add(this.colorChangeProbabilityBar);
             this.colorTab.Controls.Add(this.label12);
@@ -628,7 +642,7 @@
             // 
             // startingShapeNumberBar
             // 
-            this.startingShapeNumberBar.Location = new System.Drawing.Point(11, 208);
+            this.startingShapeNumberBar.Location = new System.Drawing.Point(6, 208);
             this.startingShapeNumberBar.Maximum = 100;
             this.startingShapeNumberBar.Minimum = 1;
             this.startingShapeNumberBar.Name = "startingShapeNumberBar";
@@ -645,6 +659,60 @@
             this.label15.Size = new System.Drawing.Size(113, 13);
             this.label15.TabIndex = 9;
             this.label15.Text = "Starting shape number";
+            // 
+            // minAlfaLabel
+            // 
+            this.minAlfaLabel.AutoSize = true;
+            this.minAlfaLabel.Location = new System.Drawing.Point(126, 64);
+            this.minAlfaLabel.Name = "minAlfaLabel";
+            this.minAlfaLabel.Size = new System.Drawing.Size(10, 13);
+            this.minAlfaLabel.TabIndex = 22;
+            this.minAlfaLabel.Text = "-";
+            // 
+            // minAlfaBar
+            // 
+            this.minAlfaBar.Location = new System.Drawing.Point(6, 80);
+            this.minAlfaBar.Maximum = 255;
+            this.minAlfaBar.Name = "minAlfaBar";
+            this.minAlfaBar.Size = new System.Drawing.Size(486, 45);
+            this.minAlfaBar.TabIndex = 21;
+            this.minAlfaBar.Scroll += new System.EventHandler(this.minAlfaBar_Scroll);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 64);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 13);
+            this.label17.TabIndex = 20;
+            this.label17.Text = "Min alfa value";
+            // 
+            // maxAlfaLabel
+            // 
+            this.maxAlfaLabel.AutoSize = true;
+            this.maxAlfaLabel.Location = new System.Drawing.Point(129, 128);
+            this.maxAlfaLabel.Name = "maxAlfaLabel";
+            this.maxAlfaLabel.Size = new System.Drawing.Size(10, 13);
+            this.maxAlfaLabel.TabIndex = 25;
+            this.maxAlfaLabel.Text = "-";
+            // 
+            // maxAlfaBar
+            // 
+            this.maxAlfaBar.Location = new System.Drawing.Point(9, 144);
+            this.maxAlfaBar.Maximum = 255;
+            this.maxAlfaBar.Name = "maxAlfaBar";
+            this.maxAlfaBar.Size = new System.Drawing.Size(486, 45);
+            this.maxAlfaBar.TabIndex = 24;
+            this.maxAlfaBar.Scroll += new System.EventHandler(this.maxAlfaBar_Scroll);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 128);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(76, 13);
+            this.label18.TabIndex = 23;
+            this.label18.Text = "Max alfa value";
             // 
             // GeneticsForm
             // 
@@ -682,6 +750,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.removeShapeProbabilityBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addShapeProbabilityBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startingShapeNumberBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minAlfaBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAlfaBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -741,5 +811,11 @@
         private System.Windows.Forms.Label startingShapeNumberLabel;
         private System.Windows.Forms.TrackBar startingShapeNumberBar;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label maxAlfaLabel;
+        private System.Windows.Forms.TrackBar maxAlfaBar;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label minAlfaLabel;
+        private System.Windows.Forms.TrackBar minAlfaBar;
+        private System.Windows.Forms.Label label17;
     }
 }

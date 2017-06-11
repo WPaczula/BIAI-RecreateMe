@@ -24,6 +24,10 @@ namespace RecreateMe
             removeShapeProbabilityBar.Value = (int)(Numbers.RemoveShapemutationProbability * 1000f);
             secondMoveDistanceBar.Value = Numbers.SecondRange;
             startingShapeNumberBar.Value = Numbers.StartingShapesNumber;
+            minAlfaBar.Value = Numbers.MinAlfa;
+            maxAlfaBar.Value = Numbers.MaxAlfa;
+            minAlfaBar_Scroll(null, null);
+            maxAlfaBar_Scroll(null, null);
             crossoverProbabilityBar_Scroll(null, null);
             crossoverRatioBar_Scroll(null, null);
             pointMoveProbabilityBar_Scroll(null, null);
@@ -128,6 +132,8 @@ namespace RecreateMe
             Numbers.RemoveShapemutationProbability = removeShapeProbabilityBar.Value / 1000f;
             Numbers.SecondRange = secondMoveDistanceBar.Value;
             Numbers.StartingShapesNumber = startingShapeNumberBar.Value;
+            Numbers.MaxAlfa = maxAlfaBar.Value;
+            Numbers.MinAlfa = minAlfaBar.Value;
             Close();
         }
 
@@ -139,6 +145,16 @@ namespace RecreateMe
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void minAlfaBar_Scroll(object sender, EventArgs e)
+        {
+            minAlfaLabel.Text = minAlfaBar.Value.ToString();
+        }
+
+        private void maxAlfaBar_Scroll(object sender, EventArgs e)
+        {
+            maxAlfaLabel.Text = maxAlfaBar.Value.ToString();
         }
     }
 }

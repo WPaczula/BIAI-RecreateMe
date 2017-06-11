@@ -8,19 +8,49 @@ namespace RecreateMeUtils
 {
     public class Numbers
     {
+        //min alfa value
+        private static int minAlfa = 30;
+        public static int MinAlfa
+        {
+            get { return minAlfa; }
+            set
+            {
+                if (value <= maxAlfa)
+                    minAlfa = value;
+            }
+        }
+        //max alfa value
+        private static int maxAlfa = 60;
+        public static int MaxAlfa
+        {
+            get { return maxAlfa; }
+            set
+            {
+                if (value >= minAlfa)
+                    maxAlfa = value;
+            }
+        }
         //min points for a shape
         private static int minPointsPerShape = 3;
         public static int MinPointsPerShape
         {
             get { return minPointsPerShape; }
-            set { minPointsPerShape = value; }
+            set
+            {
+                if (value <= maxPointsPerShape)
+                    minPointsPerShape = value;
+            }
         }
         //max points for a shape
         private static int maxPointsPerShape = 10;
         public static int MaxPointsPerShape
         {
             get { return maxPointsPerShape; }
-            set { maxPointsPerShape = value; }
+            set
+            {
+                if (minPointsPerShape <= value)
+                    maxPointsPerShape = value;
+            }
         }
         //1st move range
         private static int firstRange = 5;
@@ -54,7 +84,7 @@ namespace RecreateMeUtils
         private static double mutationProbability = 0.005f;
         public static double MutationProbability
         {
-            get {  return mutationProbability;  }
+            get { return mutationProbability; }
             set { mutationProbability = value; }
         }
         //Probability of adding a point

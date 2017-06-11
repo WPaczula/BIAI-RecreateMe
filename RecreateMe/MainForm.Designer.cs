@@ -54,6 +54,8 @@
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
             this.drawing = new Drawing();
             this.resetButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.colorButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -64,9 +66,9 @@
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startButton.Enabled = false;
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.startButton.Location = new System.Drawing.Point(12, 336);
+            this.startButton.Location = new System.Drawing.Point(13, 358);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(125, 43);
+            this.startButton.Size = new System.Drawing.Size(125, 33);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -137,6 +139,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.colorButton);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.numberOfShapesLabel);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -150,7 +154,7 @@
             this.groupBox1.Controls.Add(this.fitnessHeaderLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(125, 302);
+            this.groupBox1.Size = new System.Drawing.Size(125, 324);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
@@ -280,13 +284,34 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(13, 385);
+            this.resetButton.Enabled = false;
+            this.resetButton.Location = new System.Drawing.Point(13, 397);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(124, 47);
+            this.resetButton.Size = new System.Drawing.Size(124, 35);
             this.resetButton.TabIndex = 5;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(7, 280);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Background color";
+            // 
+            // colorButton
+            // 
+            this.colorButton.BackColor = System.Drawing.Color.Black;
+            this.colorButton.Location = new System.Drawing.Point(8, 297);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(111, 23);
+            this.colorButton.TabIndex = 12;
+            this.colorButton.UseVisualStyleBackColor = false;
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // RecreateMe
             // 
@@ -340,6 +365,8 @@
         private System.Windows.Forms.RadioButton polygonRadio;
         private System.Windows.Forms.RadioButton elipseRadio;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Label label4;
     }
 }
 

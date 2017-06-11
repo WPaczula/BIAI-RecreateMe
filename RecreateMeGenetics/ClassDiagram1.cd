@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RecreateMeGenetics.EvoColor" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAASAAQAAAAAhA=</HashCode>
+      <FileName>EvoColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecreateMeGenetics.EvoDrawing" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>ABEgAACYAAAAgoAAAACAAAAAAAAAAAAACAAAAAAABFA=</HashCode>
+      <FileName>EvoDrawing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecreateMeGenetics.EvolutionManager" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EvolutionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecreateMeGenetics.EvoPoint" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACABgAAAAYBA=</HashCode>
+      <FileName>EvoPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecreateMeGenetics.EvoShape" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAACAgAAAAICACAAAgAACIDA=</HashCode>
+      <FileName>EvoShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RecreateMeGenetics.ShapeType" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EvoDrawing.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

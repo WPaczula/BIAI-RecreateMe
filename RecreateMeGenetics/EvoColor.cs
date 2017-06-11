@@ -28,7 +28,7 @@ namespace RecreateMeGenetics
             red = Numbers.GetRandom(0, 255);
             green = Numbers.GetRandom(0, 255);
             blue = Numbers.GetRandom(0, 255);
-            alpha = Numbers.GetRandom(20, 30);
+            alpha = Numbers.GetRandom(Numbers.MinAlfa, Numbers.MaxAlfa);
         }
 
         private EvoColor(int r, int g, int b, int a)
@@ -64,7 +64,7 @@ namespace RecreateMeGenetics
             //Alpha mutation
             if (Numbers.ProbabilityFulfilled(Numbers.ColorMutationProbability))
             {
-                alpha = Numbers.GetRandom(20, 120);
+                alpha = Numbers.GetRandom(Numbers.MinAlfa, Numbers.MaxAlfa);
                 parent.NeedRepaint = true;
             }
         }

@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="EvoColor.cs" />
     <Compile Include="EvoDrawing.cs" />
-    <Compile Include="EvolutionManager.cs" />
+    <Compile Include="EvoManager.cs" />
     <Compile Include="EvoShape.cs" />
     <Compile Include="EvoPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +54,10 @@
       <Project>{ac439958-7e96-4074-835a-1371ae602781}</Project>
       <Name>RecreateMeUtils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

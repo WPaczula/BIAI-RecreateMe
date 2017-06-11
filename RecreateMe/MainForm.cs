@@ -18,6 +18,8 @@ namespace RecreateMe
         private ShapeType shapeType = ShapeType.elipse;
         //Number of the current generation
         private long generation;
+        //Background color
+        private Color backgroundColor;
         //Number of steps forward to the solution
         private long childrenSelected;
         //Fitness of current solution
@@ -105,16 +107,19 @@ namespace RecreateMe
         //Save the drawing to a file
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var safeDialog = new SaveFileDialog();
-            safeDialog.Filter = "Image Files(*.BMG)|*.BMP";
-            if (safeDialog.ShowDialog() == DialogResult.OK)
+            if (drawingToBeShown != null)
             {
-                var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
-                Graphics graphic = Graphics.FromImage(templateBitmap);
-                //TODO add user's choice
-                drawingToBeShown.Draw(graphic, Color.Black, ShapeType.elipse, resizeFactor);
-                templateBitmap.Save(safeDialog.FileName);
+                var safeDialog = new SaveFileDialog();
+                safeDialog.Filter = "Image Files(*.BMG)|*.BMP";
+                if (safeDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
+                    Graphics graphic = Graphics.FromImage(templateBitmap);
+                    drawingToBeShown.Draw(graphic, backgroundColor, shapeType, resizeFactor);
+                    templateBitmap.Save(safeDialog.FileName);
+                }
             }
+            
         }
 
         //Exit forms application
@@ -139,13 +144,8 @@ namespace RecreateMe
             while (true)
             {
                 generation++;
-                var children = EvolutionManager.Crossover(Numbers.GenerationQuantity, parents.ElementAt(0), parents.ElementAt(1));
-                foreach (var child in children)
-                {
-                    child.Mutate();
-                    child.Fitness = EvolutionManager.Fitness(child, colorTable);
-                }
-
+                var children = EvoManager.Crossover(Numbers.GenerationQuantity, parents.ElementAt(0), parents.ElementAt(1));
+                EvoManager.Mutate(children, colorTable);
                 children = (from child in children
                             orderby child.Fitness
                             select child).ToList();
@@ -156,7 +156,6 @@ namespace RecreateMe
                     {
                         childrenSelected++;
                         fitness = mostFitChild.Fitness;
-                        parents = children;
                         lock (drawingData)
                         {
                             drawingData = mostFitChild;
@@ -190,7 +189,6 @@ namespace RecreateMe
             evoThread.Abort();
         }
 
-        //TODO redraw picture if needed and change labels
         private void redrawImpulse(object sender, EventArgs e)
         {
             if (drawingData == null)
@@ -215,11 +213,13 @@ namespace RecreateMe
         {
             if (originalBitmap == null)
                 return;
-
-            var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
-            Graphics graphic = Graphics.FromImage(templateBitmap);
-            drawingToBeShown.Draw(graphic, Color.Black, shapeType, resizeFactor);
-            e.Graphics.DrawImage(templateBitmap, 0, 0);
+            if (duringDrawing)
+            {
+                var templateBitmap = new Bitmap((int)(originalBitmap.Width / resizeFactor), (int)(originalBitmap.Height / resizeFactor), PixelFormat.Format24bppRgb);
+                Graphics graphic = Graphics.FromImage(templateBitmap);
+                drawingToBeShown.Draw(graphic, backgroundColor, shapeType, resizeFactor);
+                e.Graphics.DrawImage(templateBitmap, 0, 0);
+            }
         }
 
 
@@ -263,6 +263,17 @@ namespace RecreateMe
             generation = 0;
             childrenSelected = 0;
             fitness = Double.MaxValue;
+        }
+
+        private void colorButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog cDialog = new ColorDialog();
+            cDialog.Color = backgroundColor;
+            if(cDialog.ShowDialog() == DialogResult.OK)
+            {
+                backgroundColor = cDialog.Color;
+                colorButton.BackColor = backgroundColor;
+            }
         }
     }
 }

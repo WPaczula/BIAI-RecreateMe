@@ -84,7 +84,7 @@ namespace RecreateMeGenetics
             needRepaint = false;
             MinShapePoints = minShapePoints;
             MaxShapePoints = maxShapePoints;
-            Fitness = EvolutionManager.Fitness(this, comparedImage);
+            Fitness = EvoManager.Fitness(this, comparedImage);
         }
         public EvoDrawing Crossover(EvoDrawing mate)
         {
@@ -94,7 +94,7 @@ namespace RecreateMeGenetics
 
             while (mainEnumerator.MoveNext() != false && mateEnumerator.MoveNext() != false)
             {
-                if (Numbers.ProbabilityFulfilled(Numbers.CrossoverProbability))
+                if (Numbers.ProbabilityFulfilled(Numbers.UniformCrossoverRatio))
                     shapeList.Add(mainEnumerator.Current.Clone());
                 else
                     shapeList.Add(mateEnumerator.Current.Clone());

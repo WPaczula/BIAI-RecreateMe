@@ -53,14 +53,14 @@ namespace RecreateMe
         //Opening image from dialog
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Enable components
-            startButton.Enabled = true;
-            resetButton.Enabled = true;
             //Allow to choose file
             var fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Image Files(*.BMG)|*.BMP";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                //Enable components
+                startButton.Enabled = true;
+                resetButton.Enabled = true;
                 try
                 {
                     //Set variables' values
@@ -141,24 +141,55 @@ namespace RecreateMe
         //Evolve algorithm
         public void Evolve()
         {
+
             while (true)
             {
                 generation++;
-                var children = EvoManager.Crossover(Numbers.GenerationQuantity, parents.ElementAt(0), parents.ElementAt(1));
-                EvoManager.Mutate(children, colorTable);
-                children = (from child in children
-                            orderby child.Fitness
-                            select child).ToList();
-                var mostFitChild = children.First();
-                if (mostFitChild.NeedRepaint)
+                if (Numbers.GenerationQuantity > 1)
                 {
-                    if (fitness > mostFitChild.Fitness)
+                    var children = EvoManager.Crossover(Numbers.GenerationQuantity, parents.ElementAt(0), parents.ElementAt(1));
+                    EvoManager.Mutate(children, colorTable);
+                    children = (from child in children
+                                orderby child.Fitness
+                                select child).ToList();
+                    var mostFitChild = children.First();
+                    if (mostFitChild.NeedRepaint)
                     {
-                        childrenSelected++;
-                        fitness = mostFitChild.Fitness;
-                        lock (drawingData)
+                        if (fitness >= mostFitChild.Fitness)
                         {
-                            drawingData = mostFitChild;
+                            childrenSelected++;
+                            fitness = mostFitChild.Fitness;
+                            parents = children;
+                            lock (drawingData)
+                            {
+                                drawingData = mostFitChild;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    EvoDrawing child;
+                    lock (drawingData)
+                    {
+                        child = drawingData.Clone();
+                    }
+                    child.Mutate();
+                    child.Fitness = EvoManager.Fitness(child, colorTable);
+                    if (child.NeedRepaint)
+                    {
+                        if(fitness >= child.Fitness)
+                        {
+                            childrenSelected++;
+                            fitness = child.Fitness;
+                            //Keep possibility to come back
+                            parents.Clear();
+                            parents.Add(child.Clone());
+                            parents.Add(child.Clone());
+                            lock (drawingData)
+                            {
+                                drawingData = child;
+                            }
                         }
                     }
                 }
@@ -198,12 +229,11 @@ namespace RecreateMe
                 if (drawingData.NeedRepaint)
                 {
                     drawingToBeShown = drawingData.Clone();
+                    drawingData.NeedRepaint = false;
                     numberOfShapesLabel.Text = drawingToBeShown.ShapesNumber.ToString();
                     drawing.Invalidate();
-                    drawingData.NeedRepaint = false;
                 }
-            }
-
+            }            
             generationLabel.Text = generation.ToString();
             childrenNumberLabel.Text = childrenSelected.ToString();
             fitnessLabel.Text = fitness.ToString();
@@ -258,7 +288,8 @@ namespace RecreateMe
                 parents = new List<EvoDrawing>();
             for (int i = 0; i < Numbers.GenerationQuantity; i++)
             {
-                parents.Add(new EvoDrawing(Numbers.MinPointsPerShape, Numbers.MaxPointsPerShape, colorTable));
+                var adam = new EvoDrawing(Numbers.MinPointsPerShape, Numbers.MaxPointsPerShape, colorTable);
+                parents.Add(adam.Clone());
             }
             generation = 0;
             childrenSelected = 0;

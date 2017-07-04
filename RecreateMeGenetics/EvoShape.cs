@@ -44,9 +44,13 @@ namespace RecreateMeGenetics
             color = new EvoColor();
 
             shapePoints = new List<EvoPoint>();
+            var center = new EvoPoint();
+
             for (int i=0; i<MinPoints; i++)
-            {
-                shapePoints.Add(new EvoPoint());
+            {   
+                int X = Math.Min(Math.Max(0, center.X + Numbers.GetRandom(-3, 3)), Numbers.MaxWidth);
+                int Y = Math.Min(Math.Max(0, center.Y + Numbers.GetRandom(-3, 3)), Numbers.MaxHeight);
+                shapePoints.Add(new EvoPoint(X, Y));
             }            
         }
 

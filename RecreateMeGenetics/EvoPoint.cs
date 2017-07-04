@@ -33,7 +33,7 @@ namespace RecreateMeGenetics
             Y = Numbers.GetRandom(0, Numbers.MaxHeight);
         }
 
-        private EvoPoint(int x, int y)
+        public EvoPoint(int x, int y)
         {
             X = x;
             Y = y;

@@ -159,7 +159,7 @@
             // 
             this.generationQuantityBar.Location = new System.Drawing.Point(6, 144);
             this.generationQuantityBar.Maximum = 100;
-            this.generationQuantityBar.Minimum = 2;
+            this.generationQuantityBar.Minimum = 1;
             this.generationQuantityBar.Name = "generationQuantityBar";
             this.generationQuantityBar.Size = new System.Drawing.Size(486, 45);
             this.generationQuantityBar.TabIndex = 7;

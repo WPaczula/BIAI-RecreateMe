@@ -40,6 +40,8 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.colorButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.numberOfShapesLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,8 +56,6 @@
             this.redrawGenerator = new System.Windows.Forms.Timer(this.components);
             this.drawing = new Drawing();
             this.resetButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.colorButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPictureBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -66,7 +66,8 @@
             this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startButton.Enabled = false;
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.startButton.Location = new System.Drawing.Point(13, 358);
+            this.startButton.Location = new System.Drawing.Point(13, 357);
+            this.startButton.MaximumSize = new System.Drawing.Size(125, 33);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(125, 33);
             this.startButton.TabIndex = 0;
@@ -82,7 +83,7 @@
             this.exitToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(960, 24);
+            this.menuStrip.Size = new System.Drawing.Size(958, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -158,6 +159,26 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "data";
+            // 
+            // colorButton
+            // 
+            this.colorButton.BackColor = System.Drawing.Color.Black;
+            this.colorButton.Location = new System.Drawing.Point(8, 297);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(111, 23);
+            this.colorButton.TabIndex = 12;
+            this.colorButton.UseVisualStyleBackColor = false;
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(7, 280);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Background color";
             // 
             // numberOfShapesLabel
             // 
@@ -293,31 +314,11 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(7, 280);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Background color";
-            // 
-            // colorButton
-            // 
-            this.colorButton.BackColor = System.Drawing.Color.Black;
-            this.colorButton.Location = new System.Drawing.Point(8, 297);
-            this.colorButton.Name = "colorButton";
-            this.colorButton.Size = new System.Drawing.Size(111, 23);
-            this.colorButton.TabIndex = 12;
-            this.colorButton.UseVisualStyleBackColor = false;
-            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
-            // 
             // RecreateMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 444);
+            this.ClientSize = new System.Drawing.Size(958, 443);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.drawing);
             this.Controls.Add(this.groupBox1);
@@ -325,6 +326,7 @@
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(363, 299);
             this.Name = "RecreateMe";
             this.Text = "BIAI";
